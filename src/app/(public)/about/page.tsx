@@ -109,11 +109,11 @@ function MissionSection() {
           </div>
 
           <p className="text-lg text-light leading-relaxed">
-            AGRISOLARBOT is a solar-powered, IoT-enabled smart farming vehicle developed as part of a Bachelor of Engineering project in Agricultural Engineering at PPG Institute of Technology under Anna University, Chennai. The system integrates multiple agricultural operations into a single machine, including ploughing, seed sowing, seed drilling, weeding, and spraying.
+            AGRISOLARBOT is an advanced multipurpose smart farming vehicle developed as a Bachelor of Engineering project in Agricultural Engineering by Abarna M and Jaya Sounthari A at PPG Institute of Technology, Coimbatore under Anna University, Chennai (April 2026). This IoT-driven robotic platform integrates five pivotal farm processes into a single compact unit: soil ploughing (10-20 cm depth), seed sowing with uniform placement, precision seed drilling (3-6 cm underground), weed removal for nutrient preservation, and water/fertilizer spraying from a 30-liter tank.
           </p>
 
           <p className="text-lg text-light leading-relaxed">
-            It is specifically designed for small and medium-scale farmers to improve efficiency, reduce manual effort, and promote sustainable farming practices. The system reduces labor dependency, improves operational speed, and ensures efficient use of resources. Its lightweight and compact design makes it suitable for small farms, while its automation capabilities bring precision farming to rural areas.
+            The system addresses critical agricultural challenges faced by small and medium-scale farmers: labor shortages (50% reduction through automation), high operational costs (60% cost reduction vs traditional methods), inefficient manual farming, and environmental concerns. Powered by solar panels with lithium-ion battery backup, AGRISOLARBOT operates at 0.3-0.7 acres/hour coverage with 40% water/fertilizer savings. Controlled via an intuitive mobile app with Bluetooth/IoT connectivity, it brings precision agriculture, autonomous control, and sustainable farming practices to rural areas across Tamil Nadu.
           </p>
 
           {/* Action Buttons */}

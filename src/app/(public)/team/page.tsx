@@ -349,21 +349,30 @@ export default function TeamPage() {
                 <div className="space-y-4">
                   <h3 className="text-xl font-display font-bold text-primary">Core Developers</h3>
                   <ul className="space-y-3">
-                    <li className="flex items-center gap-3 p-3 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
-                      <span className="text-2xl">👩‍💻</span>
-                      <div>
+                    <li className="flex items-start gap-3 p-4 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
+                      <span className="text-2xl flex-shrink-0">👩‍💻</span>
+                      <div className="flex-1">
                         <p className="font-semibold text-dark">Abarna M</p>
-                        <p className="text-sm text-light">Agricultural Engineering</p>
+                        <p className="text-sm text-light">Roll: 712522225001</p>
+                        <p className="text-xs text-primary font-medium mt-1">B.E. Agricultural Engineering</p>
                       </div>
                     </li>
-                    <li className="flex items-center gap-3 p-3 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
-                      <span className="text-2xl">👩‍💼</span>
-                      <div>
+                    <li className="flex items-start gap-3 p-4 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
+                      <span className="text-2xl flex-shrink-0">👩‍💼</span>
+                      <div className="flex-1">
                         <p className="font-semibold text-dark">Jaya Sounthari A</p>
-                        <p className="text-sm text-light">Project Lead & Strategy</p>
+                        <p className="text-sm text-light">Roll: 712522225008</p>
+                        <p className="text-xs text-primary font-medium mt-1">Project Lead & Agricultural Engineering</p>
                       </div>
                     </li>
                   </ul>
+                  <div className="border-t border-primary/10 pt-3 mt-3">
+                    <h4 className="text-sm font-bold text-primary mb-2">Faculty Supervision</h4>
+                    <ul className="space-y-1 text-sm">
+                      <li className="text-dark"><span className="font-semibold">Guide:</span> Mr. B. Sakthi Navaneethan, M.E.</li>
+                      <li className="text-dark"><span className="font-semibold">HOD:</span> Mr. S. Selvakumar, M.E.</li>
+                    </ul>
+                  </div>
                 </div>
 
                 {/* Project Details */}
@@ -387,9 +396,15 @@ export default function TeamPage() {
               </div>
 
               {/* Project Description */}
-              <div className="border-t border-primary/10 pt-6">
+              <div className="border-t border-primary/10 pt-6 space-y-4">
                 <p className="text-dark/80 leading-relaxed">
-                  AGRISOLARBOT was developed as a comprehensive Bachelor of Engineering project integrating mechanical, electrical, and IoT systems. The system demonstrates how renewable energy, automation, and IoT technology can transform traditional agriculture into precision farming.
+                  AGRISOLARBOT was developed as a comprehensive Bachelor of Engineering project at PPG Institute of Technology, Coimbatore (affiliated to Anna University, Chennai). The project integrates mechanical design, electrical engineering, IoT systems, and renewable energy technologies into a multipurpose smart farming vehicle.
+                </p>
+                <p className="text-dark/80 leading-relaxed">
+                  The system addresses critical agricultural challenges: labor shortage (50% reduction), high operational costs (₹50-80/hour vs ₹400-600 traditional), inefficient resource usage (40% water savings), and lack of farm automation. The robot seamlessly executes five pivotal operations—ploughing (10-20 cm depth), seed sowing with uniform placement, precision seed drilling (3-6 cm), weed removal, and spraying—from a single 30-liter tank.
+                </p>
+                <p className="text-dark/80 leading-relaxed">
+                  Powered by solar panels with lithium-ion battery backup and controlled via mobile app with Bluetooth/IoT connectivity, AGRISOLARBOT covers 0.3-0.7 acres/hour. It represents innovation in sustainable farming technology specifically designed for small-scale farmers across Tamil Nadu.
                 </p>
               </div>
             </div>

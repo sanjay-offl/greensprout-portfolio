@@ -132,10 +132,10 @@ export default function PerformancePage() {
             📊 Validated Results
           </div>
           <h1 className="text-5xl md:text-7xl font-display font-extrabold tracking-tight leading-tight mb-6 bg-gradient-to-r from-[#111827] via-[#2F6B3C] to-[#6FAF5E] bg-clip-text text-transparent">
-            Data & Performance
+            Field Test Results
           </h1>
           <p className="text-xl text-dark/70 max-w-3xl mx-auto leading-relaxed">
-            Real-world testing demonstrates exponential improvement over traditional agricultural techniques. These aren't promises — they're verified metrics.
+            AGRISOLARBOT field trials on Tamil Nadu farms demonstrate significant performance improvements. Real-world data validates efficiency gains across all operations from labor reduction to resource optimization.
           </p>
         </div>
       </section>
@@ -177,27 +177,27 @@ export default function PerformancePage() {
               {
                 metric: '50%',
                 title: 'Labor Reduction',
-                desc: 'Reduces labor requirement from 2-3 workers to 1 operator, addressing critical labor shortage crisis.',
+                desc: 'Reduces labor requirement from 2-3 workers to 1 trained operator. Addresses critical agricultural labor shortage across Tamil Nadu.',
               },
               {
                 metric: '0.3-0.7 acres/hr',
-                title: 'Coverage Area',
-                desc: 'Covers 0.3 to 0.7 acres per hour with precision automation, enabling efficient farm management.',
+                title: 'Field Coverage',
+                desc: 'Processes 0.3 to 0.7 acres per hour per function. Unified passes reduce total fieldwork by over 40% vs traditional methods.',
               },
               {
-                metric: '↑ Accuracy',
-                title: 'Seed Placement',
-                desc: 'Improves seed placement accuracy significantly, ensuring optimal crop density and yields.',
+                metric: '✓ Enhanced',
+                title: 'Seed Accuracy',
+                desc: 'Improves seed placement uniformity (3-6 cm depth), germination rates, and optimal plant spacing for better yields.',
               },
               {
                 metric: '-40%',
-                title: 'Water Wastage',
-                desc: 'Reduces water and fertilizer wastage through precision IoT-driven delivery systems.',
+                title: 'Water Savings',
+                desc: 'Reduces water and fertilizer wastage through precision IoT-controlled spraying and metering systems.',
               },
               {
-                metric: '↑ Productivity',
-                title: 'Overall Yield',
-                desc: 'Enhances overall productivity through consistent, optimized farming operations.',
+                metric: '↑ 60% Savings',
+                title: 'Operating Cost',
+                desc: 'Reduces operational cost to ₹50-80/hour vs ₹400-600 with traditional machinery. Solar power eliminates fuel dependency.',
               },
               {
                 metric: '₹50-80/hr',

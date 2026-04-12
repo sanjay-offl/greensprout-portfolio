@@ -79,13 +79,13 @@ export default function TechnologyPage() {
 
         <div className="max-w-7xl mx-auto text-center relative z-10 mb-16">
           <div className="inline-block bg-accent/20 text-primary text-xs font-bold px-4 py-2 rounded-full border border-accent/40 mb-8 uppercase tracking-widest">
-            🔧 Engineering
+            🔧 Engineering Excellence
           </div>
           <h1 className="text-5xl md:text-7xl font-display font-extrabold tracking-tight leading-tight mb-6 bg-gradient-to-r from-[#111827] via-[#2F6B3C] to-[#6FAF5E] bg-clip-text text-transparent">
-            Technology Stack
+            Technology & Manufacturing
           </h1>
           <p className="text-xl text-dark/70 max-w-3xl mx-auto leading-relaxed">
-            Deep engineering meets agricultural innovation. Powerful hardware and intelligent software driving AGRISOLARBOT's autonomous capabilities.
+            Advanced mechanical engineering with solar power integration. From concept to field operations—comprehensive hardware, IoT control, and sustainable energy systems powering precision agriculture.
           </p>
         </div>
       </section>

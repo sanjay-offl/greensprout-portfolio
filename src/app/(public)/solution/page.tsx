@@ -148,7 +148,7 @@ export default function SolutionPage() {
               {/* Description */}
               <FadeIn delay={300}>
                 <p className="text-base sm:text-lg text-dark/70 dark:text-light/80 max-w-3xl mx-auto leading-relaxed">
-                  A fully integrated, solar-powered farming solution that replaces manual operations with intelligent, Bluetooth-controlled automation. Silent. Sustainable. Scalable.
+                  AGRISOLARBOT is a solar-powered multipurpose smart farming vehicle that replaces labor-intensive manual operations with intelligent IoT-controlled automation. It seamlessly performs five critical farm operations—ploughing (10-20 cm depth), seed sowing with uniform placement, precision seed drilling (3-6 cm), weed removal, and spraying from a 30-liter tank. Fully autonomous. Battery-backed. App-controlled via Bluetooth.
                 </p>
               </FadeIn>
             </div>
@@ -167,7 +167,7 @@ export default function SolutionPage() {
                       Smart Integration Platform
                     </h2>
                     <p className="text-base sm:text-lg text-dark/70 dark:text-light/75 leading-relaxed">
-                      AGRISOLARBOT seamlessly combines multiple critical farming processes into one unified, automated platform. Ploughing, seeding, weeding, spraying, and monitoring — all controlled from your Android device.
+                      AGRISOLARBOT integrates mechanical systems, electrical engineering, IoT control, and renewable solar energy into a single unified platform. Designed specifically for small and medium-scale farmers, it overcomes critical challenges: labor shortage (50% reduction from 2-3 workers to 1 operator), high operational costs (60% reduction to ₹50-80/hour vs ₹400-600 traditional), water wastage (40% reduction), and inefficient resource management. Operating at 0.3-0.7 acres/hour with 12V 50W monocrystalline solar panel and 12V lithium-ion battery backup, AGRISOLARBOT enables precision farming with mobile app control via Bluetooth connectivity.
                     </p>
                   </div>
 
