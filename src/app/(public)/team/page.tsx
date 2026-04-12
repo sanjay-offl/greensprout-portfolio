@@ -3,44 +3,34 @@ import { useEffect, useRef, useState } from 'react';
 
 const team = [
   {
-    name: 'Jaya Sounthari A',
-    role: 'Chief Executive Officer',
-    initials: 'JS',
-    color: 'from-emerald-500 to-teal-600',
-    desc: 'Visionary leader driving GREENSPROUT\'s mission and strategy.',
-    icon: '🚀',
+    name: 'Jaya Sounthari',
+    role: 'Chief Executive Officer (CEO)',
+    image: '/images/team/jaya.jpeg',
+    fallbackIcon: '👩‍💼',
   },
   {
     name: 'Anand V',
-    role: 'Chief Technology Officer',
-    initials: 'AV',
-    color: 'from-blue-500 to-indigo-600',
-    desc: 'Engineering lead for AGRISOLARBOT robotics and IoT systems.',
-    icon: '⚙️',
+    role: 'Chief Technology Officer (CTO)',
+    image: '/images/team/anandh.jpeg',
+    fallbackIcon: '👨‍💻',
   },
   {
-    name: 'Kavi Nishathini S',
-    role: 'Chief Operating Officer',
-    initials: 'KN',
-    color: 'from-purple-500 to-violet-600',
-    desc: 'Overseeing operations, compliance, and project timelines.',
-    icon: '📊',
+    name: 'Kavi Nishathini',
+    role: 'Chief Operating Officer (COO)',
+    image: '/images/team/kavi.jpeg',
+    fallbackIcon: '👩‍💼',
   },
   {
     name: 'Sanjay S',
-    role: 'Head of R&D',
-    initials: 'SS',
-    color: 'from-orange-500 to-red-500',
-    desc: 'Leading hardware development and automation research.',
-    icon: '🔬',
+    role: 'Research & Development (R&D)',
+    image: '/images/team/sanjay.jpeg',
+    fallbackIcon: '👨‍🔬',
   },
   {
     name: 'Abrana M',
-    role: 'Marketing & Outreach',
-    initials: 'AM',
-    color: 'from-pink-500 to-rose-600',
-    desc: 'Brand strategy, stakeholder communication, and growth.',
-    icon: '📢',
+    role: 'Marketing Lead',
+    image: '/images/team/abrana.jpeg',
+    fallbackIcon: '👩‍💼',
   },
 ];
 
@@ -61,9 +51,20 @@ const mentors = [
   },
 ];
 
+/* ── Image Loading Skeleton ─────── */
+function ImageSkeleton() {
+  return (
+    <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-50 animate-pulse">
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+    </div>
+  );
+}
+
 /* ── Team Member Card Component ─────── */
 function TeamCard({ member, index }: { member: (typeof team)[0]; index: number }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -86,53 +87,52 @@ function TeamCard({ member, index }: { member: (typeof team)[0]; index: number }
   return (
     <div
       ref={ref}
-      className={`group relative transition-all duration-700 transform ${
-        isVisible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-8'
+      className={`transition-all duration-700 transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      {/* Glassmorphism card with anti-gravity effect */}
-      <div className="relative h-full glass-panel hover:scale-105 hover:-translate-y-1 cursor-pointer overflow-hidden">
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-500 from-primary to-accent pointer-events-none rounded-3xl" />
+      <div className="group relative cursor-pointer overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-green-200/40 hover:scale-[1.03] h-full flex flex-col">
+        {/* Image Container */}
+        <div className="relative aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex-shrink-0">
+          {isLoading && <ImageSkeleton />}
 
-        {/* Content container */}
-        <div className="relative flex flex-col items-center text-center gap-6 p-8 md:p-10">
-          {/* Avatar container with hover effect */}
-          <div className="relative group/avatar">
-            {/* Glowing halo effect */}
-            <div className="absolute -inset-3 bg-gradient-to-br rounded-full opacity-0 group-hover/avatar:opacity-40 blur-lg transition-opacity duration-500 from-primary to-accent" />
-
-            {/* Avatar circle */}
-            <div
-              className={`relative w-28 h-28 rounded-full bg-gradient-to-br ${member.color} p-1.5 shadow-[0_20px_40px_-10px_rgba(47,107,60,0.3)] transition-all duration-500 group-hover/avatar:shadow-[0_30px_60px_-15px_rgba(47,107,60,0.5)]`}
-            >
-              <div className="w-full h-full rounded-full bg-white/95 flex items-center justify-center backdrop-blur-xl">
-                <div className="text-center">
-                  <div className="text-2xl mb-1">{member.icon}</div>
-                  <span className="text-sm font-display font-bold text-dark/50">{member.initials}</span>
-                </div>
+          {!hasError ? (
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              onLoad={() => setIsLoading(false)}
+              onError={(e) => {
+                setHasError(true);
+                setIsLoading(false);
+                (e.target as HTMLImageElement).src = '';
+              }}
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 flex items-center justify-center">
+              <div className="text-center space-y-2">
+                <div className="text-5xl opacity-60">{member.fallbackIcon}</div>
+                <p className="text-xs text-light/60 font-medium">Image unavailable</p>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Text content */}
-          <div className="flex-1 space-y-3">
-            <h3 className="text-xl md:text-2xl font-display font-bold text-dark leading-snug">
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+
+          {/* Green Glow Border on Hover */}
+          <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent/50 rounded-2xl transition-colors duration-300 pointer-events-none" />
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 p-5 space-y-2 flex flex-col justify-between text-center">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">
               {member.name}
             </h3>
-            <div className="inline-block">
-              <p className="text-xs md:text-sm font-bold tracking-widest text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text uppercase">
-                {member.role}
-              </p>
-            </div>
-            <p className="text-sm md:text-base text-light leading-relaxed pt-2">{member.desc}</p>
+            <p className="text-sm text-gray-500">{member.role}</p>
           </div>
-
-          {/* Bottom accent line */}
-          <div className="w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
         </div>
       </div>
     </div>
@@ -171,41 +171,37 @@ function MentorCard({ mentor, index }: { mentor: (typeof mentors)[0]; index: num
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="group relative glass-panel overflow-hidden hover:scale-102 hover:-translate-y-1 transition-all duration-500">
-        {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 from-primary to-accent pointer-events-none rounded-3xl transition-opacity duration-500" />
+      <div className="group relative bg-gradient-to-br from-green-50 to-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg hover:shadow-green-200/50 hover:scale-[1.02] transition-all duration-300 overflow-hidden p-6">
+        {/* Background gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
         {/* Content */}
-        <div className="relative flex flex-col md:flex-row gap-6 md:gap-8 md:items-start">
-          {/* Avatar section */}
-          <div className="flex-shrink-0 group/avatar">
-            {/* Glowing circle halo */}
-            <div className="absolute -inset-4 bg-gradient-to-br rounded-2xl opacity-0 group-hover/avatar:opacity-30 blur-xl transition-opacity duration-500 from-primary via-accent to-primary" />
-
-            {/* Avatar card */}
-            <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-[0_15px_35px_-10px_rgba(47,107,60,0.4)] flex items-center justify-center text-4xl group-hover/avatar:shadow-[0_25px_50px_-15px_rgba(47,107,60,0.6)] transition-all duration-500">
-              <span className="text-5xl">{mentor.icon}</span>
+        <div className="relative flex items-start gap-5">
+          {/* Icon Container */}
+          <div className="flex-shrink-0">
+            <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 text-3xl group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-300">
+              {mentor.icon}
             </div>
           </div>
 
-          {/* Text content */}
+          {/* Text Content */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg md:text-xl font-display font-bold text-dark mb-2 leading-snug">
+            <h3 className="text-lg font-display font-bold text-dark mb-1 group-hover:text-primary transition-colors duration-300">
               {mentor.name}
             </h3>
-            <div className="inline-block mb-4">
-              <p className="text-xs md:text-sm font-bold tracking-widest text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text uppercase">
+            <div className="mb-3">
+              <p className="text-xs font-bold tracking-widest text-primary/80 uppercase">
                 {mentor.role}
               </p>
             </div>
-            <p className="text-sm md:text-base text-light leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               {mentor.description}
             </p>
 
             {/* Hover indicator */}
-            <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="flex-1 h-1 bg-gradient-to-r from-accent/50 to-transparent rounded-full" />
-              <span className="text-xs font-medium text-accent">Expert guidance</span>
+            <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="flex-1 h-0.5 bg-gradient-to-r from-primary to-transparent rounded-full" />
+              <span className="text-xs font-medium text-primary whitespace-nowrap">Expert guidance</span>
             </div>
           </div>
         </div>
@@ -235,8 +231,8 @@ export default function TeamPage() {
           </div>
 
           {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-display font-extrabold mb-6 leading-tight">
-            <span className="heading-gradient">Meet Our Team</span>
+          <h1 className="text-5xl md:text-7xl font-display font-extrabold mb-6 leading-tight bg-gradient-to-r from-[#2F6B3C] via-[#6FAF5E] to-[#2F6B3C] bg-clip-text text-transparent">
+            Meet Our Team
           </h1>
 
           {/* Subtitle text */}
@@ -265,7 +261,7 @@ export default function TeamPage() {
           </div>
 
           {/* Team grid with staggered animation */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {team.map((member, idx) => (
               <TeamCard key={member.name} member={member} index={idx} />
             ))}
@@ -288,7 +284,7 @@ export default function TeamPage() {
                 <span className="w-2 h-2 rounded-full bg-primary" />
                 Expert Guidance
               </div>
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-dark">
+              <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight bg-gradient-to-r from-[#2F6B3C] via-[#6FAF5E] to-[#2F6B3C] bg-clip-text text-transparent">
                 Our Mentors
               </h2>
               <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
@@ -307,8 +303,8 @@ export default function TeamPage() {
             <div className="mt-20 pt-16 border-t border-white/20">
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
                 <div className="space-y-2">
-                  <div className="text-3xl md:text-4xl font-display font-bold text-primary">5+</div>
-                  <p className="text-sm md:text-base text-light">Team Members</p>
+                  <div className="text-3xl md:text-4xl font-display font-bold text-primary">5</div>
+                  <p className="text-sm md:text-base text-light">Leadership Team</p>
                 </div>
                 <div className="space-y-2">
                   <div className="text-3xl md:text-4xl font-display font-bold text-primary">2+</div>

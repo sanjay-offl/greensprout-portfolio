@@ -1,206 +1,400 @@
-import Image from 'next/image';
+'use client';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import FadeIn from '@/components/animations/FadeIn';
 
-const stats = [
-  { value: '60%', label: 'Cost Reduction' },
-  { value: '40%', label: 'Resource Savings' },
-  { value: '3×', label: 'Efficiency Gain' },
-  { value: '₹1.92L', label: 'Govt. Funded' },
+interface Stat {
+  value: string;
+  label: string;
+  color?: string;
+  context?: string;
+}
+
+interface Feature {
+  icon: string;
+  title: string;
+  desc: string;
+  geo: string;
+}
+
+interface Organization {
+  name: string;
+  sub: string;
+  icon: string;
+  achieved?: string;
+}
+
+const stats: Stat[] = [
+  { value: '60%', label: 'Cost Reduction', color: '#FF6B6B', context: 'vs. traditional farming' },
+  { value: '40%', label: 'Resource Savings', color: '#FFA94D', context: 'water & fuel efficiency' },
+  { value: '3×', label: 'Efficiency Gain', color: '#74C0FC', context: 'task completion speed' },
+  { value: '₹1.92L', label: 'Govt. Funded', color: '#9775FA', context: 'R&D support secured' },
 ];
 
-const badges = [
-  '🏛️ TN-EDII Innovation Voucher',
-  '📜 MSME Registered',
-  '🤝 NGI TBI Knowledge Partner',
+const features: Feature[] = [
+  { icon: '☀️', title: 'Solar Powered', desc: '12V 50W panel, zero fuel', geo: 'India-wide' },
+  { icon: '📱', title: 'Bluetooth Control', desc: 'Android app navigation', geo: 'Rural areas' },
+  { icon: '📡', title: 'IoT Sensors', desc: 'Real-time soil data', geo: 'Tamil Nadu' },
+  { icon: '🚜', title: 'Fully Automated', desc: 'Plough, sow, spray', geo: 'All crops' },
+];
+
+const organizations: Organization[] = [
+  { name: 'Government of India', sub: 'Ministry of MSME', icon: '🇮🇳', achieved: 'Official Recognition' },
+  { name: 'TN-EDII', sub: 'Innovation Voucher Program', icon: '🏛️', achieved: 'State Support' },
+  { name: 'NGI TBI', sub: 'Knowledge Partner', icon: '🤝', achieved: 'Mentorship & Network' },
+  { name: 'PPG Institute', sub: 'Technology Host', icon: '🎓', achieved: 'Incubation Hub' },
 ];
 
 export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <main>
-      {/* ╔═══════════════════╗ */}
-      {/* ║      HERO          ║ */}
-      {/* ╚═══════════════════╝ */}
+    <main className="bg-gradient-to-b from-background via-white/50 dark:via-dark/50 to-background">
+      {/* ══ HERO SECTION ══ */}
       <section
         id="hero"
-        className="relative min-h-screen flex items-center pt-28 pb-16 px-6 overflow-hidden"
-        aria-label="Hero section"
+        className="relative min-h-screen flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        aria-label="Hero section - GREENSPROUT AGRISOLARBOT"
+        role="region"
       >
-        {/* Ambient background blobs */}
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-          <div className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] animate-float" />
-          <div className="absolute -bottom-20 -right-20 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[160px]" />
+        {/* Animated background blobs with parallax */}
+        <div className="absolute inset-0 -z-20 pointer-events-none overflow-hidden">
+          <div
+            className="absolute -top-20 -left-20 w-96 h-96 bg-accent/10 dark:bg-accent/5 rounded-full blur-3xl opacity-40 animate-float"
+            style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute -bottom-20 -right-20 w-96 h-96 bg-primary/8 dark:bg-primary/5 rounded-full blur-3xl opacity-40"
+            style={{ transform: `translateY(${scrollY * 0.2}px)` }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-b from-primary/5 via-transparent to-transparent dark:from-primary/10 pointer-events-none"
+            aria-hidden="true"
+          />
         </div>
 
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          {/* Left — Text */}
-          <div className="space-y-8 z-10">
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-2">
-              {badges.map((b) => (
-                <span key={b} className="text-xs font-medium bg-white border border-gray-200 text-dark/70 px-3 py-1.5 rounded-full shadow-sm">
-                  {b}
+        <div className="max-w-6xl mx-auto w-full flex justify-center relative z-10">
+          {/* Center — Text & Content */}
+          <FadeIn>
+            <div className="flex flex-col justify-center space-y-8 sm:space-y-10 text-center w-full">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 w-fit mx-auto">
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" aria-hidden="true"></span>
+                <span className="text-xs sm:text-sm font-semibold text-primary dark:text-accent">
+                  🌍 Transforming Indian Agriculture
                 </span>
-              ))}
-            </div>
-
-            {/* Wordmark + logo */}
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 relative shrink-0">
-                <Image src="/images/logo.png" alt="GREENSPROUT logo" fill className="object-contain" priority />
               </div>
-              <h1 className="text-5xl md:text-7xl font-display font-extrabold tracking-tight leading-none bg-gradient-to-r from-[#111827] via-[#2F6B3C] to-[#6FAF5E] bg-clip-text text-transparent">
-                GREEN<br />SPROUT
-              </h1>
-            </div>
 
-            <div>
-              <p className="text-xl md:text-2xl font-display font-semibold text-primary tracking-wide">
-                AGRISOLARBOT™
+              {/* Main Heading */}
+              <div className="space-y-2 sm:space-y-4">
+                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-black tracking-tight leading-tight bg-gradient-to-r from-[#111827] via-[#2F6B3C] to-[#6FAF5E] dark:from-[#86868B] dark:to-[#6FAF5E] bg-clip-text text-transparent">
+                  GREENSPROUT
+                </h1>
+
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold text-primary dark:text-accent tracking-wide">
+                  AGRISOLARBOT™
+                </h2>
+              </div>
+
+              {/* Description */}
+              <p className="text-base sm:text-lg text-dark/70 dark:text-light/80 max-w-2xl mx-auto leading-relaxed">
+                A solar-powered, IoT-enabled autonomous farming vehicle that reduces labor, improves efficiency, and enables sustainable agriculture across India.
               </p>
-              <p className="text-base text-light mt-1">Bluetooth Controlled Smart Farming Vehicle</p>
-            </div>
 
-            <p className="text-lg text-dark/70 max-w-xl leading-relaxed">
-              A solar-powered, IoT-enabled autonomous farming vehicle that eliminates labor gaps, slashes costs by 60%, and revolutionizes small-scale agriculture across India.
-            </p>
+              {/* CTA buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 sm:pt-6 justify-center">
+                <Link
+                  href="/solution"
+                  className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-accent text-white font-display font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  aria-label="Explore the complete AGRISOLARBOT solution"
+                >
+                  <span>Explore Project</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+                <Link
+                  href="/features"
+                  className="inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-white/10 text-primary dark:text-accent font-display font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-primary/30 dark:border-accent/30 hover:border-primary/60 dark:hover:border-accent/60 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-white/20 transition-all duration-300"
+                  aria-label="View all features and specifications"
+                >
+                  View Features
+                </Link>
+              </div>
 
-            {/* CTA buttons */}
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/solution"
-                className="bg-primary text-white font-display font-semibold px-8 py-4 rounded-full shadow-lg shadow-primary/30 hover:bg-accent hover:-translate-y-1 transition-all duration-300 text-base"
-              >
-                Explore Project →
-              </Link>
-              <Link
-                href="/features"
-                className="bg-white text-primary font-display font-semibold px-8 py-4 rounded-full border border-primary/20 shadow-sm hover:-translate-y-1 hover:border-primary/40 hover:shadow-md transition-all duration-300 text-base"
-              >
-                View Features
-              </Link>
-            </div>
-
-            {/* Stats row */}
-            <div className="grid grid-cols-4 gap-4 pt-4">
-              {stats.map((s) => (
-                <div key={s.label} className="text-center">
-                  <p className="text-2xl md:text-3xl font-display font-extrabold text-primary">{s.value}</p>
-                  <p className="text-xs text-light mt-1 leading-tight">{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right — Hero image */}
-          <div className="relative z-10">
-            {/* Glow halo */}
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/10 rounded-[2.5rem] blur-3xl scale-90 -z-10" />
-            {/* Image card */}
-            <div className="relative bg-white/60 backdrop-blur-sm border border-white rounded-[2rem] p-3 shadow-2xl shadow-primary/10 animate-float">
-              <Image
-                src="/images/agrisolarbot.png"
-                width={760}
-                height={560}
-                alt="AGRISOLARBOT solar-powered smart farming vehicle prototype"
-                priority
-                className="w-full h-auto rounded-[1.5rem] object-cover"
-              />
-              {/* Floating badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white border border-gray-200 shadow-xl rounded-full px-5 py-2.5 flex items-center gap-2 whitespace-nowrap">
-                <span className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-dark">Active Prototype · Tamil Nadu</span>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-8 sm:pt-12 max-w-3xl mx-auto w-full">
+                {stats.map((s, idx) => (
+                  <FadeIn key={s.label} delay={idx * 100}>
+                    <div className="text-center">
+                      <p
+                        className="text-2xl sm:text-3xl lg:text-4xl font-display font-black leading-tight"
+                        style={{ color: s.color || '#2F6B3C' }}
+                      >
+                        {s.value}
+                      </p>
+                      <p className="text-xs sm:text-sm font-bold text-dark/60 dark:text-light/60 mt-2 leading-tight">
+                        {s.label}
+                      </p>
+                      <p className="text-xs text-dark/50 dark:text-light/50 mt-1">{s.context}</p>
+                    </div>
+                  </FadeIn>
+                ))}
               </div>
             </div>
+          </FadeIn>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce z-10" aria-hidden="true">
+          <div className="w-6 h-10 border-2 border-primary/30 dark:border-accent/30 rounded-full flex items-start justify-center p-2">
+            <div className="w-1 h-2 bg-primary dark:bg-accent rounded-full animate-pulse" />
           </div>
         </div>
       </section>
 
-      {/* ╔═══════════════════╗ */}
-      {/* ║  QUICK FEATURES    ║ */}
-      {/* ╚═══════════════════╝ */}
-      <section className="py-20 px-6 bg-white">
+      {/* ══ QUICK FEATURES SECTION ══ */}
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-white/5 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: '☀️', title: 'Solar Powered', desc: '12V 50W panel, zero fuel' },
-              { icon: '📱', title: 'Bluetooth Control', desc: 'Android app navigation' },
-              { icon: '📡', title: 'IoT Sensors', desc: 'Real-time soil data' },
-              { icon: '🚜', title: 'Fully Automated', desc: 'Plough, sow, spray' },
-            ].map((f) => (
-              <div key={f.title} className="card-base hover:border-primary/30 text-center flex flex-col items-center gap-3">
-                <span className="text-4xl">{f.icon}</span>
-                <h3 className="font-display font-bold text-dark text-sm">{f.title}</h3>
-                <p className="text-light text-xs">{f.desc}</p>
-              </div>
+          {/* Section Header */}
+          <FadeIn>
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dark dark:text-white mb-4">
+                Platform Capabilities
+              </h2>
+              <p className="text-base sm:text-lg text-dark/70 dark:text-light/75 max-w-2xl mx-auto">
+                Integrated technology stack built for Indian farming challenges
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {features.map((feature, idx) => (
+              <FadeIn key={feature.title} delay={idx * 100}>
+                <div className="group relative bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-primary/10 hover:border-primary/30 dark:border-white/5 dark:hover:border-accent/30 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-2xl transition-all duration-500 h-full flex flex-col hover:scale-[1.02] hover:-translate-y-2">
+                  {/* Top accent bar */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl"
+                    style={{
+                      background: `linear-gradient(90deg, #2F6B3C, transparent)`,
+                    }}
+                    aria-hidden="true"
+                  />
+
+                  {/* Icon */}
+                  <div className="text-4xl sm:text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg sm:text-xl font-display font-bold text-dark dark:text-white mb-2 leading-snug">
+                    {feature.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-dark/70 dark:text-light/70 leading-relaxed flex-1 mb-4">
+                    {feature.desc}
+                  </p>
+
+                  {/* GEO Tag */}
+                  <div className="flex items-center gap-2 text-xs font-bold text-primary/70 dark:text-accent/70">
+                    <span>📍 {feature.geo}</span>
+                  </div>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ╔═══════════════════╗ */}
-      {/* ║  ABOUT PREVIEW     ║ */}
-      {/* ╚═══════════════════╝ */}
-      <section className="py-24 px-6">
+      {/* ══ ABOUT PREVIEW SECTION ══ */}
+      <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10 rounded-3xl p-10 md:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <div className="inline-block bg-primary/10 text-primary text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
-                  About the Startup
+          <FadeIn>
+            <div className="bg-gradient-to-br from-white/70 to-accent/5 dark:from-white/10 dark:to-accent/5 backdrop-blur-xl border border-primary/10 dark:border-accent/20 rounded-3xl p-8 sm:p-12 lg:p-16 hover:shadow-2xl transition-all duration-500">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                {/* Left: Content */}
+                <div className="space-y-6 sm:space-y-8">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 w-fit">
+                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse" aria-hidden="true"></span>
+                    <span className="text-xs sm:text-sm font-bold text-primary dark:text-accent uppercase tracking-wide">
+                      About GREENSPROUT
+                    </span>
+                  </div>
+
+                  {/* Heading */}
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dark dark:text-white leading-tight">
+                    Innovating Agriculture
+                    <br />
+                    <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                      from the Ground Up
+                    </span>
+                  </h2>
+
+                  {/* Description */}
+                  <p className="text-base sm:text-lg text-dark/70 dark:text-light/75 leading-relaxed">
+                    GREENSPROUT is an innovative agri-tech startup developing solar-powered, Bluetooth-controlled smart farming vehicles that automate agricultural processes efficiently and economically for India's farming sector.
+                  </p>
+
+                  {/* CTA */}
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-2 group font-display font-bold text-primary dark:text-accent border-2 border-primary/30 dark:border-accent/30 px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:border-primary/60 dark:hover:border-accent/60 hover:bg-primary/5 dark:hover:bg-accent/5 transition-all duration-300"
+                    aria-label="Learn more about GREENSPROUT startup"
+                  >
+                    <span>Learn More</span>
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </Link>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-display font-extrabold bg-gradient-to-r from-[#111827] via-[#2F6B3C] to-[#6FAF5E] bg-clip-text text-transparent leading-tight tracking-tight">
-                  Innovating Agriculture from the Ground Up
-                </h2>
-                <p className="text-dark/70 text-lg leading-relaxed">
-                  GREENSPROUT is an innovative agri-tech startup developing solar-powered, Bluetooth-controlled smart farming vehicles that automate agricultural processes efficiently and economically.
-                </p>
-                <Link
-                  href="/about"
-                  className="inline-block font-display font-semibold text-primary border border-primary/30 px-6 py-3 rounded-full hover:bg-primary hover:text-white transition-all duration-300"
-                >
-                  Learn More →
-                </Link>
+
+                {/* Right: Stats Grid */}
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                  {[
+                    { icon: '🌱', val: '146M+', label: 'Target Farms', geo: 'India' },
+                    { icon: '💰', val: '₹1.92L', label: 'Govt. Funding', geo: 'Secured' },
+                    { icon: '⚡', val: '40%', label: 'Resources Saved', geo: 'Per operation' },
+                    { icon: '🚀', val: '8 mos', label: 'Dev Timeline', geo: 'Achieved' },
+                  ].map((item, idx) => (
+                    <FadeIn key={item.label} delay={idx * 100}>
+                      <div className="group relative bg-white/70 dark:bg-white/10 backdrop-blur-xl rounded-2xl p-6 sm:p-8 text-center shadow-sm hover:shadow-lg border border-primary/10 dark:border-white/5 hover:border-primary/30 dark:hover:border-accent/30 transition-all duration-300 hover:scale-[1.05] hover:-translate-y-1">
+                        {/* Top bar on hover */}
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-primary rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+
+                        <div className="text-3xl sm:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                          {item.icon}
+                        </div>
+                        <div className="text-2xl sm:text-3xl font-display font-black text-primary dark:text-accent mb-1">
+                          {item.val}
+                        </div>
+                        <p className="text-xs sm:text-sm font-bold text-dark/70 dark:text-light/70 mb-1">
+                          {item.label}
+                        </p>
+                        <p className="text-xs text-primary/60 dark:text-accent/60 font-semibold">
+                          📍 {item.geo}
+                        </p>
+                      </div>
+                    </FadeIn>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ══ GOVERNMENT RECOGNITION SECTION ══ */}
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/50 to-primary/5 dark:from-white/5 dark:to-primary/5 backdrop-blur-sm border-t border-b border-primary/10 dark:border-primary/20">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <FadeIn>
+            <div className="text-center mb-10 sm:mb-14">
+              <p className="text-xs sm:text-sm font-bold text-primary/70 dark:text-accent/70 uppercase tracking-widest mb-4">
+                Official Recognition & Support
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black text-dark dark:text-white">
+                Trusted by Government & Institutions
+              </h2>
+            </div>
+          </FadeIn>
+
+          {/* Organizations Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {organizations.map((org, idx) => (
+              <FadeIn key={org.name} delay={idx * 100}>
+                <div className="group relative bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-primary/10 hover:border-primary/30 dark:border-white/5 dark:hover:border-accent/30 rounded-2xl p-6 sm:p-8 text-center transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 hover:shadow-lg">
+                  {/* Top accent */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-2xl" aria-hidden="true" />
+
+                  {/* Icon */}
+                  <div className="text-4xl sm:text-5xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {org.icon}
+                  </div>
+
+                  {/* Organization name */}
+                  <h3 className="font-display font-bold text-dark dark:text-white text-sm sm:text-base mb-1">
+                    {org.name}
+                  </h3>
+
+                  {/* Subtitle */}
+                  <p className="text-xs text-dark/70 dark:text-light/70 mb-3 leading-snug">
+                    {org.sub}
+                  </p>
+
+                  {/* Achievement badge */}
+                  <div className="inline-block px-3 py-1.5 rounded-full text-xs font-bold bg-primary/10 dark:bg-primary/20 text-primary dark:text-accent border border-primary/20 dark:border-primary/30">
+                    ✓ {org.achieved}
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          {/* Trust Indicators */}
+          <FadeIn delay={400}>
+            <div className="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t border-primary/10 dark:border-primary/20">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
                 {[
-                  { icon: '🌱', val: '146M+', label: 'Target Farms India' },
-                  { icon: '💰', val: '₹1.92L', label: 'Govt. Funding Secured' },
-                  { icon: '⚡', val: '40%', label: 'Resource Saved' },
-                  { icon: '🚀', val: '8 mos', label: 'Project Duration' },
-                ].map((item) => (
-                  <div key={item.label} className="bg-white rounded-2xl p-5 text-center shadow-sm border border-gray-100">
-                    <div className="text-2xl mb-2">{item.icon}</div>
-                    <div className="text-2xl font-display font-extrabold text-primary">{item.val}</div>
-                    <div className="text-xs text-light mt-1">{item.label}</div>
+                  { icon: '📜', val: 'MSME Registered', desc: 'Ministry of MSME' },
+                  { icon: '🏆', val: 'Innovation Voucher', desc: 'TN-EDII Program' },
+                  { icon: '🤝', val: 'Knowledge Partners', desc: '10+ Institutions' },
+                ].map((indicator, idx) => (
+                  <div key={indicator.val} className="space-y-2">
+                    <div className="text-3xl sm:text-4xl">{indicator.icon}</div>
+                    <p className="font-display font-bold text-dark dark:text-white text-sm sm:text-base">
+                      {indicator.val}
+                    </p>
+                    <p className="text-xs text-dark/60 dark:text-light/60">{indicator.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* ╔═══════════════════╗ */}
-      {/* ║  GOVT TRUST STRIP  ║ */}
-      {/* ╚═══════════════════╝ */}
-      <section className="py-14 px-6 bg-white border-t border-b border-gray-100">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-xs font-semibold text-light uppercase tracking-widest mb-6">Officially Recognized & Supported By</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {[
-              { name: 'Government of India', sub: 'Ministry of MSME', icon: '🇮🇳' },
-              { name: 'TN-EDII', sub: 'Innovation Voucher Program', icon: '🏛️' },
-              { name: 'NGI TBI', sub: 'Knowledge Partner', icon: '🤝' },
-              { name: 'PPG Institute', sub: 'Technology Host', icon: '🎓' },
-            ].map((org) => (
-              <div key={org.name} className="text-center">
-                <div className="text-3xl mb-1">{org.icon}</div>
-                <p className="font-display font-bold text-dark text-sm">{org.name}</p>
-                <p className="text-xs text-light">{org.sub}</p>
+      {/* ══ FINAL CTA SECTION ══ */}
+      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <div className="relative bg-gradient-to-br from-primary/95 to-primary dark:from-primary/80 dark:to-primary/60 rounded-3xl p-8 sm:p-12 lg:p-16 text-white overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
+              {/* Background blobs */}
+              <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -z-10" aria-hidden="true" />
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -z-10" aria-hidden="true" />
+
+              <div className="relative z-10 space-y-6 text-center">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black leading-tight">
+                  Ready to Transform Farming?
+                </h2>
+
+                <p className="text-base sm:text-lg text-white/90 leading-relaxed">
+                  Join the agricultural revolution. AGRISOLARBOT is engineered for Indian farmers, tested for Indian farming conditions, and ready to scale nationwide.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-white text-primary font-display font-bold hover:scale-105 hover:shadow-lg transition-all duration-300 text-sm sm:text-base"
+                  >
+                    Get in Touch
+                  </Link>
+                  <Link
+                    href="/solution"
+                    className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white text-white font-display font-bold hover:bg-white/10 transition-all duration-300 text-sm sm:text-base"
+                  >
+                    Explore Solution
+                  </Link>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </main>
