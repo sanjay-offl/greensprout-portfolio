@@ -8,11 +8,27 @@ export const metadata: Metadata = {
   keywords: 'smart farming India, solar agriculture Tamil Nadu, agri automation startup, AGRISOLARBOT, farming robot India, IoT agriculture Coimbatore, MSME agri-tech',
   authors: [{ name: 'GREENSPROUT Pvt. Ltd.' }],
   openGraph: {
-    title: 'GREENSPROUT – AGRISOLARBOT Smart Farming Vehicle',
-    description: 'Sustainable smart farming automation from Tamil Nadu, India. TN-EDII funded, MSME registered.',
+    title: 'GREENSPROUT | AGRISOLARBOT – Smart Solar Farming Vehicle',
+    description: 'Solar-powered autonomous farming vehicle for sustainable agriculture. MSME registered, TN-EDII funded, government recognized.',
     type: 'website',
     locale: 'en_IN',
     siteName: 'GREENSPROUT',
+    url: 'https://greensprouts-offl.netlify.app',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'GREENSPROUT AGRISOLARBOT - Smart Solar-Powered Farming Vehicle',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'GREENSPROUT | AGRISOLARBOT',
+    description: 'Next-gen smart solar farming vehicle for Indian agriculture',
+    images: ['/og-image.png'],
+    creator: '@GREENSPROUT',
   },
 };
 
