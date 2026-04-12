@@ -30,8 +30,6 @@ export const metadata: Metadata = {
     description: 'Next-gen smart solar farming vehicle for Indian agriculture',
     images: ['https://greensprouts-offl.netlify.app/og-image.png'],
     creator: '@GREENSPROUT',
-    site ['https://greensprouts-offl.netlify.app/og-image.png'],
-    creator: '@GREENSPROUT',
     site: '@GREENSPROUT',
   },
 };
