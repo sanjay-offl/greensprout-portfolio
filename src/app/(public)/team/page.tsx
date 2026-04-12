@@ -321,6 +321,83 @@ export default function TeamPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════ */}
+      {/* PROJECT DEVELOPERS SECTION */}
+      {/* ══════════════════════════════════════════════════════════════ */}
+      <section className="relative px-6 py-20 md:py-32 bg-gradient-to-br from-primary/5 to-accent/5 border-t border-white/30">
+        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none -z-10" />
+
+        <div className="max-w-6xl mx-auto">
+          <div className="space-y-16">
+            {/* Section header */}
+            <div className="text-center space-y-4">
+              <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-primary/30 text-sm font-semibold text-primary">
+                <span className="w-2 h-2 rounded-full bg-primary" />
+                Project Innovation
+              </div>
+              <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight bg-gradient-to-r from-[#2F6B3C] via-[#6FAF5E] to-[#2F6B3C] bg-clip-text text-transparent">
+                AGRISOLARBOT Project Developers
+              </h2>
+              <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
+                Engineering excellence from PPG Institute of Technology, Anna University
+              </p>
+            </div>
+
+            {/* Project Details */}
+            <div className="glass-panel p-8 md:p-12 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Core Developers */}
+                <div className="space-y-4">
+                  <h3 className="text-xl font-display font-bold text-primary">Core Developers</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-3 p-3 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
+                      <span className="text-2xl">👩‍💻</span>
+                      <div>
+                        <p className="font-semibold text-dark">Abarna M</p>
+                        <p className="text-sm text-light">Agricultural Engineering</p>
+                      </div>
+                    </li>
+                    <li className="flex items-center gap-3 p-3 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
+                      <span className="text-2xl">👩‍💼</span>
+                      <div>
+                        <p className="font-semibold text-dark">Jaya Sounthari A</p>
+                        <p className="text-sm text-light">Project Lead & Strategy</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Project Details */}
+                <div className="space-y-4">
+                  <h3 className="text-xl font-display font-bold text-primary">Project Details</h3>
+                  <div className="space-y-3">
+                    <div className="p-3 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
+                      <p className="text-xs font-bold text-primary/70 uppercase">Institution</p>
+                      <p className="font-semibold text-dark">PPG Institute of Technology, Coimbatore</p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
+                      <p className="text-xs font-bold text-primary/70 uppercase">Affiliation</p>
+                      <p className="font-semibold text-dark">Anna University, Chennai</p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-white/50 hover:bg-white/80 transition-colors">
+                      <p className="text-xs font-bold text-primary/70 uppercase">Completed</p>
+                      <p className="font-semibold text-dark">April 2026</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Project Description */}
+              <div className="border-t border-primary/10 pt-6">
+                <p className="text-dark/80 leading-relaxed">
+                  AGRISOLARBOT was developed as a comprehensive Bachelor of Engineering project integrating mechanical, electrical, and IoT systems. The system demonstrates how renewable energy, automation, and IoT technology can transform traditional agriculture into precision farming.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════ */}
       {/* CTA SECTION */}
       {/* ══════════════════════════════════════════════════════════════ */}
       <section className="px-6 py-20 md:py-24">

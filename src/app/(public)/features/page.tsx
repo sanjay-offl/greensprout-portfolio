@@ -285,6 +285,148 @@ export default function FeaturesPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════ */}
+      {/* ADVANTAGES SECTION */}
+      {/* ══════════════════════════════════════════════════════════════ */}
+      <section className="px-6 py-20 md:py-32 bg-gradient-to-br from-primary/5 to-accent/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
+              Key Advantages
+            </h2>
+            <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
+              AGRISOLARBOT delivers comprehensive benefits for modern sustainable farming
+            </p>
+          </div>
+
+          {/* Advantages Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {[
+              { icon: '🌱', title: 'Renewable Energy', desc: 'Uses renewable solar energy, reducing fuel dependency and environmental impact.' },
+              { icon: '💰', title: 'Cost-Effective', desc: 'Operating costs drop 60% compared to traditional diesel machinery.' },
+              { icon: '⏱️', title: 'Time Efficient', desc: 'Covers 0.3 to 0.7 acres per hour with precision automation.' },
+              { icon: '💧', title: 'Water Conservation', desc: 'Reduces water wastage by up to 40% through precision irrigation.' },
+              { icon: '🎯', title: 'Precision Farming', desc: 'Improved seed placement accuracy and efficient resource usage.' },
+              { icon: '👥', title: 'Labor Reduction', desc: 'Reduces labor requirement by up to 50%, addressing shortage crisis.' },
+              { icon: '🔧', title: 'Easy to Operate', desc: 'Simple Android app control suitable for farmers with basic technical knowledge.' },
+              { icon: '🌍', title: 'Sustainable', desc: 'Eco-friendly solution promoting sustainable farming practices for future generations.' },
+            ].map((advantage, idx) => (
+              <div
+                key={advantage.title}
+                className="group glass-panel p-8 md:p-10 space-y-4 hover:scale-105 hover:-translate-y-2 transition-all duration-500"
+              >
+                <div className="text-5xl group-hover:scale-110 transition-transform duration-300">{advantage.icon}</div>
+                <h3 className="text-xl font-display font-bold text-dark">{advantage.title}</h3>
+                <p className="text-light leading-relaxed">{advantage.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* APPLICATIONS SECTION */}
+      {/* ══════════════════════════════════════════════════════════════ */}
+      <section className="px-6 py-20 md:py-32 border-t border-white/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
+              Real-World Applications
+            </h2>
+            <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
+              AGRISOLARBOT is designed for diverse agricultural use cases
+            </p>
+          </div>
+
+          {/* Applications Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {[
+              { icon: '🌾', title: 'Seed Sowing', desc: 'Uniform seed placement for optimal germination and yield density.' },
+              { icon: '🚜', title: 'Soil Ploughing', desc: 'Deep soil preparation using precision cultivator tools.' },
+              { icon: '🌿', title: 'Weeding', desc: 'Targeted weed removal using rotating blades between crop rows.' },
+              { icon: '💦', title: 'Smart Farming', desc: 'Precision irrigation with sensor-triggered water delivery.' },
+              { icon: '🏡', title: 'Precision Agriculture', desc: 'Data-driven farming decisions using IoT sensor insights.' },
+              { icon: '🌱', title: 'Sustainable Practices', desc: 'Eco-friendly farming promoting long-term soil health.' },
+              { icon: '🏫', title: 'Educational Projects', desc: 'Learning platform for agricultural engineering students.' },
+              { icon: '🤝', title: 'Startup Initiatives', desc: 'Proof-of-concept for agri-tech entrepreneurs.' },
+              { icon: '🔬', title: 'Research Applications', desc: 'Testing ground for new agricultural technologies.' },
+            ].map((app, idx) => (
+              <div
+                key={app.title}
+                className="glass-panel p-8 md:p-10 space-y-4 hover:scale-105 hover:shadow-lg transition-all duration-500"
+              >
+                <div className="text-5xl">{app.icon}</div>
+                <h3 className="text-lg font-display font-bold text-dark">{app.title}</h3>
+                <p className="text-sm text-light leading-relaxed">{app.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* LIMITATIONS & CONSIDERATIONS SECTION */}
+      {/* ══════════════════════════════════════════════════════════════ */}
+      <section className="px-6 py-20 md:py-32 bg-orange-50/50 border-t border-white/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
+              Considerations & Future Scope
+            </h2>
+            <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
+              Understanding current limitations and exciting future enhancements
+            </p>
+          </div>
+
+          {/* Two-column layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Current Limitations */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-display font-bold text-dark flex items-center gap-3">
+                <span>⚠️</span> Current Limitations
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  'Depends on sunlight for charging - works best in sunny regions',
+                  'Not suitable for very large farms (optimized for small-medium scale)',
+                  'Requires basic technical knowledge for maintenance',
+                  'Battery capacity limits extended operating hours',
+                  'Electronic components need protection from dust and moisture',
+                  'Higher initial setup cost compared to manual farming',
+                ].map((limitation, idx) => (
+                  <li key={idx} className="flex gap-4">
+                    <span className="text-orange-500 font-bold text-xl flex-shrink-0">•</span>
+                    <span className="text-dark/80">{limitation}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Future Enhancements */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-display font-bold text-dark flex items-center gap-3">
+                <span>🔮</span> Future Scope
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  'Artificial Intelligence for autonomous decision-making',
+                  'GPS integration for autonomous navigation',
+                  'Cloud-based IoT systems for remote monitoring',
+                  'Full automation without human intervention',
+                  'Hybrid renewable energy systems (solar + wind)',
+                  'Advanced harvesting mechanisms and tools',
+                ].map((future, idx) => (
+                  <li key={idx} className="flex gap-4">
+                    <span className="text-green-600 font-bold text-xl flex-shrink-0">→</span>
+                    <span className="text-dark/80">{future}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════ */}
       {/* CTA SECTION */}
       {/* ══════════════════════════════════════════════════════════════ */}
       <section className="px-6 py-20 md:py-24">

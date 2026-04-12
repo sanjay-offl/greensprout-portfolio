@@ -109,11 +109,11 @@ function MissionSection() {
           </div>
 
           <p className="text-lg text-light leading-relaxed">
-            We are a high-tech agritech startup focused on eliminating the critical barriers in traditional farming. By integrating deep robotics automation, renewable energy, and IoT monitoring, we aim to reverse the devastating effects of labor collapse and resource exhaustion on India's rural farms.
+            AGRISOLARBOT is a solar-powered, IoT-enabled smart farming vehicle developed as part of a Bachelor of Engineering project in Agricultural Engineering at PPG Institute of Technology under Anna University, Chennai. The system integrates multiple agricultural operations into a single machine, including ploughing, seed sowing, seed drilling, weeding, and spraying.
           </p>
 
           <p className="text-lg text-light leading-relaxed">
-            Through <span className="font-bold text-primary">AGRISOLARBOT</span>, our flagship solar-automated farming platform, we deploy accessible micro-automation directly into the hands of small-scale farmers who feed the world.
+            It is specifically designed for small and medium-scale farmers to improve efficiency, reduce manual effort, and promote sustainable farming practices. The system reduces labor dependency, improves operational speed, and ensures efficient use of resources. Its lightweight and compact design makes it suitable for small farms, while its automation capabilities bring precision farming to rural areas.
           </p>
 
           {/* Action Buttons */}
@@ -136,10 +136,10 @@ function MissionSection() {
         {/* Values Grid */}
         <div className="grid grid-cols-2 gap-4 md:gap-6">
           {[
-            { icon: '🎯', title: 'Mission', desc: 'Automate farming for small-scale Indian farmers sustainably.' },
-            { icon: '🌍', title: 'Vision', desc: 'Lead the global agri-automation revolution from India.' },
-            { icon: '⚡', title: 'Energy', desc: 'Solar-powered, fully renewable operation model.' },
-            { icon: '🔬', title: 'Innovation', desc: 'IoT, robotics, and AI at the core of every solution.' },
+            { icon: '☀️', title: 'Solar Powered', desc: '12V 50W monocrystalline solar panel with battery backup.' },
+            { icon: '📱', title: 'IoT Enabled', desc: 'Real-time monitoring via Android app with Bluetooth control.' },
+            { icon: '🚜', title: 'Multi-Function', desc: 'Plough, sow, weed, spray, and monitor in one device.' },
+            { icon: '🌱', title: 'Sustainable', desc: 'Zero emissions, eco-friendly solution for modern agriculture.' },
           ].map((item, idx) => (
             <ValueCard key={item.title} item={item} index={idx} />
           ))}
@@ -243,7 +243,7 @@ export default function AboutPage() {
 
           {/* Subtitle text */}
           <p className="text-lg md:text-xl text-light max-w-2xl mx-auto leading-relaxed mb-8">
-            Pioneering sustainable agri-tech from the heartlands of Tamil Nadu, India by reimagining agriculture through innovation and renewable energy.
+            GREENSPROUT is an innovative agri-tech startup based in Coimbatore, Tamil Nadu, focused on transforming traditional farming through smart automation, renewable energy, and IoT-based solutions. Our flagship innovation, AGRISOLARBOT – A Multi Functional Smart Farming Vehicle – addresses real-world agricultural challenges such as labor shortages, rising costs, and inefficient farming practices.
           </p>
 
           {/* Animated underline */}

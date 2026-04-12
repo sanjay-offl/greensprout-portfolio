@@ -159,6 +159,67 @@ export default function PerformancePage() {
         </div>
       </section>
 
+      {/* ══ DETAILED PERFORMANCE RESULTS ══ */}
+      <section className="py-20 px-6 bg-gradient-to-br from-primary/5 to-accent/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
+              Field Test Results
+            </h2>
+            <p className="text-lg text-dark/70 max-w-2xl mx-auto">
+              Comprehensive testing on real farms demonstrates significant improvements in agricultural efficiency
+            </p>
+          </div>
+
+          {/* Results Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            {[
+              {
+                metric: '50%',
+                title: 'Labor Reduction',
+                desc: 'Reduces labor requirement from 2-3 workers to 1 operator, addressing critical labor shortage crisis.',
+              },
+              {
+                metric: '0.3-0.7 acres/hr',
+                title: 'Coverage Area',
+                desc: 'Covers 0.3 to 0.7 acres per hour with precision automation, enabling efficient farm management.',
+              },
+              {
+                metric: '↑ Accuracy',
+                title: 'Seed Placement',
+                desc: 'Improves seed placement accuracy significantly, ensuring optimal crop density and yields.',
+              },
+              {
+                metric: '-40%',
+                title: 'Water Wastage',
+                desc: 'Reduces water and fertilizer wastage through precision IoT-driven delivery systems.',
+              },
+              {
+                metric: '↑ Productivity',
+                title: 'Overall Yield',
+                desc: 'Enhances overall productivity through consistent, optimized farming operations.',
+              },
+              {
+                metric: '₹50-80/hr',
+                title: 'Operating Cost',
+                desc: 'Operating cost drops to ₹50-80 per hour vs ₹400-600 with traditional machinery.',
+              },
+            ].map((result, idx) => (
+              <div
+                key={result.title}
+                className="group glass-panel p-8 md:p-10 space-y-4 hover:scale-105 hover:shadow-lg transition-all duration-500"
+              >
+                <div className="text-4xl md:text-5xl font-display font-bold text-primary group-hover:scale-110 transition-transform duration-300">
+                  {result.metric}
+                </div>
+                <h3 className="text-xl font-display font-bold text-dark">{result.title}</h3>
+                <p className="text-dark/80 leading-relaxed">{result.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══ GOVERNMENT BACKING ══ */}
       <section className="py-20 px-6 bg-white/50">
         <div className="max-w-4xl mx-auto">
