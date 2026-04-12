@@ -16,10 +16,11 @@ export const metadata: Metadata = {
     url: 'https://greensprouts-offl.netlify.app',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://greensprouts-offl.netlify.app/og-image.png',
         width: 1200,
         height: 630,
         alt: 'GREENSPROUT AGRISOLARBOT - Smart Solar-Powered Farming Vehicle',
+        type: 'image/png',
       },
     ],
   },
@@ -27,8 +28,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'GREENSPROUT | AGRISOLARBOT',
     description: 'Next-gen smart solar farming vehicle for Indian agriculture',
-    images: ['/og-image.png'],
+    images: ['https://greensprouts-offl.netlify.app/og-image.png'],
     creator: '@GREENSPROUT',
+    site ['https://greensprouts-offl.netlify.app/og-image.png'],
+    creator: '@GREENSPROUT',
+    site: '@GREENSPROUT',
   },
 };
 
