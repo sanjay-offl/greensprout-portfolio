@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import FadeIn from '@/components/animations/FadeIn';
+import { useTranslations } from '@/i18n/useTranslations';
 
 interface Problem {
   icon: string;
@@ -12,48 +13,10 @@ interface Problem {
   geo: string;
 }
 
-const problems: Problem[] = [
-  {
-    icon: '👷',
-    title: 'Labor Shortage Crisis',
-    color: '#FF6B6B',
-    desc: 'India faces a critical shortage of agricultural workers. Aging farmer populations, rural-to-urban migration, and physical demands drive up labor costs and reduce farm productivity.',
-    impact: 'Average farm labor cost increased by 65% in last 5 years',
-    stat: '40% of farmers can\'t find workers',
-    geo: 'India-wide',
-  },
-  {
-    icon: '⛽',
-    title: 'High Fuel Costs',
-    color: '#FFA94D',
-    desc: 'Traditional diesel-powered machinery obliterates profit margins for small-scale farmers. Fuel price volatility makes seasonal planning nearly impossible.',
-    impact: 'Diesel accounts for 35-40% of operational expenses',
-    stat: '₹8,000-12,000 per hectare annually',
-    geo: 'Rural India',
-  },
-  {
-    icon: '💧',
-    title: 'Inefficient Irrigation',
-    color: '#74C0FC',
-    desc: 'Flood irrigation wastes up to 60% of water used. Without precision systems, overwatering and drought damage devastate crop yields.',
-    impact: 'India faces chronic water scarcity',
-    stat: '60% water waste annually',
-    geo: 'Tamil Nadu & Drought zones',
-  },
-  {
-    icon: '⚙️',
-    title: 'Lack of Automation',
-    color: '#9775FA',
-    desc: 'Less than 5% of Indian farms use any form of automation. Manual processes limit scalability and trap farmers in low-output cycles.',
-    impact: 'Limits farm scalability and efficiency',
-    stat: '< 5% farms automated',
-    geo: 'Nationwide challenge',
-  },
-];
-
 function ProblemCard({ problem, index }: { problem: Problem; index: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -144,11 +107,11 @@ function ProblemCard({ problem, index }: { problem: Problem; index: number }) {
           {/* Impact & Stat Row */}
           <div className="grid grid-cols-2 gap-4 pt-4 border-t border-primary/10">
             <div>
-              <p className="text-xs font-bold text-dark/50 dark:text-light/50 mb-1">Impact</p>
+              <p className="text-xs font-bold text-dark/50 dark:text-light/50 mb-1">{t('problem.impact')}</p>
               <p className="text-sm font-semibold text-dark dark:text-white">{problem.impact}</p>
             </div>
             <div>
-              <p className="text-xs font-bold text-dark/50 dark:text-light/50 mb-1">Statistic</p>
+              <p className="text-xs font-bold text-dark/50 dark:text-light/50 mb-1">{t('problem.statistic')}</p>
               <p className="text-sm font-semibold" style={{ color: problem.color }}>
                 {problem.stat}
               </p>
@@ -168,6 +131,47 @@ function ProblemCard({ problem, index }: { problem: Problem; index: number }) {
 }
 
 export default function ProblemPage() {
+  const t = useTranslations();
+
+  const problems: Problem[] = [
+    {
+      icon: '👷',
+      title: t('problem.laborTitle'),
+      color: '#FF6B6B',
+      desc: t('problem.laborDesc'),
+      impact: t('problem.laborImpact'),
+      stat: t('problem.laborStat'),
+      geo: t('problem.indiaWide'),
+    },
+    {
+      icon: '⛽',
+      title: t('problem.fuelTitle'),
+      color: '#FFA94D',
+      desc: t('problem.fuelDesc'),
+      impact: t('problem.fuelImpact'),
+      stat: t('problem.fuelStat'),
+      geo: t('problem.ruralIndia'),
+    },
+    {
+      icon: '💧',
+      title: t('problem.irrigationTitle'),
+      color: '#74C0FC',
+      desc: t('problem.irrigationDesc'),
+      impact: t('problem.irrigationImpact'),
+      stat: t('problem.irrigationStat'),
+      geo: t('problem.tnDrought'),
+    },
+    {
+      icon: '⚙️',
+      title: t('problem.automationTitle'),
+      color: '#9775FA',
+      desc: t('problem.automationDesc'),
+      impact: t('problem.automationImpact'),
+      stat: t('problem.automationStat'),
+      geo: t('problem.nationwide'),
+    },
+  ];
+
   return (
     <>
       {/* SEO Schema */}
@@ -198,7 +202,7 @@ export default function ProblemPage() {
             <FadeIn>
               <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-red-50/60 dark:bg-red-900/20 backdrop-blur-md border border-red-200/50 dark:border-red-800/50 text-sm font-semibold text-red-600 dark:text-red-400">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                The Challenge We're Solving
+                {t('problem.badge')}
               </div>
             </FadeIn>
 
@@ -206,7 +210,7 @@ export default function ProblemPage() {
             <FadeIn delay={100}>
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-black mb-6 leading-tight">
                 <span className="block bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-clip-text text-transparent">
-                  Agricultural Crisis
+                  {t('problem.heading')}
                 </span>
               </h1>
             </FadeIn>
@@ -214,7 +218,7 @@ export default function ProblemPage() {
             {/* Subtitle text */}
             <FadeIn delay={200}>
               <p className="text-lg md:text-xl text-dark/70 dark:text-light/80 max-w-2xl mx-auto leading-relaxed mb-8">
-                Traditional farming in India faces four critical challenges. AGRISOLARBOT directly addresses every one of them.
+                {t('problem.desc')}
               </p>
             </FadeIn>
 
@@ -232,10 +236,10 @@ export default function ProblemPage() {
             <FadeIn>
               <div className="text-center space-y-4">
                 <h2 className="text-4xl md:text-5xl font-display font-black text-dark dark:text-white">
-                  Four Critical Barriers
+                  {t('problem.fourBarriers')}
                 </h2>
                 <p className="text-dark/70 dark:text-light/70 text-base md:text-lg max-w-2xl mx-auto">
-                  Each barrier contributes to lower productivity, higher costs, and reduced profitability for India's farmers
+                  {t('problem.barriersDesc')}
                 </p>
               </div>
             </FadeIn>
@@ -261,15 +265,15 @@ export default function ProblemPage() {
                 <div className="relative z-10 space-y-6 text-center">
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-sm font-semibold text-white">
                     <span className="w-2 h-2 rounded-full bg-white" />
-                    The GREENSPROUT Solution
+                    {t('problem.solutionBadge')}
                   </div>
 
                   <h2 className="text-3xl md:text-4xl font-display font-black leading-tight">
-                    AGRISOLARBOT™: Addressing Every Challenge
+                    {t('problem.solutionHeading')}
                   </h2>
 
                   <p className="text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">
-                    One integrated platform solving labor shortage, fuel costs, irrigation efficiency, and automation — all powered by solar energy.
+                    {t('problem.solutionDesc')}
                   </p>
 
                   <div className="pt-4">
@@ -277,7 +281,7 @@ export default function ProblemPage() {
                       href="/solution"
                       className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-primary font-display font-bold hover:scale-105 hover:shadow-lg transition-all duration-300"
                     >
-                      Explore the Solution →
+                      {t('problem.exploreSolution')}
                     </a>
                   </div>
                 </div>

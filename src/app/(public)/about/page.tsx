@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from '@/i18n/useTranslations';
 
 /* ── Core Values Card Component ─────── */
 function ValueCard({ item, index }: { item: { icon: string; title: string; desc: string }; index: number }) {
@@ -70,6 +71,7 @@ function ValueCard({ item, index }: { item: { icon: string; title: string; desc:
 function MissionSection() {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -101,19 +103,19 @@ function MissionSection() {
           <div>
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-primary/30 text-sm font-semibold text-primary">
               <span className="w-2 h-2 rounded-full bg-primary" />
-              Our Vision
+              {t('about.visionBadge')}
             </div>
             <h2 className="text-4xl md:text-5xl font-display font-extrabold text-dark leading-tight mb-4">
-              Transforming Agriculture Through Innovation
+              {t('about.visionHeading')}
             </h2>
           </div>
 
           <p className="text-lg text-light leading-relaxed">
-            AGRISOLARBOT is an advanced multipurpose smart farming vehicle developed as a Bachelor of Engineering project in Agricultural Engineering by Abarna M and Jaya Sounthari A at PPG Institute of Technology, Coimbatore under Anna University, Chennai (April 2026). This IoT-driven robotic platform integrates five pivotal farm processes into a single compact unit: soil ploughing (10-20 cm depth), seed sowing with uniform placement, precision seed drilling (3-6 cm underground), weed removal for nutrient preservation, and water/fertilizer spraying from a 30-liter tank.
+            {t('about.visionDesc')}
           </p>
 
           <p className="text-lg text-light leading-relaxed">
-            The system addresses critical agricultural challenges faced by small and medium-scale farmers: labor shortages (50% reduction through automation), high operational costs (60% cost reduction vs traditional methods), inefficient manual farming, and environmental concerns. Powered by solar panels with lithium-ion battery backup, AGRISOLARBOT operates at 0.3-0.7 acres/hour coverage with 40% water/fertilizer savings. Controlled via an intuitive mobile app with Bluetooth/IoT connectivity, it brings precision agriculture, autonomous control, and sustainable farming practices to rural areas across Tamil Nadu.
+            {t('about.visionDesc2')}
           </p>
 
           {/* Action Buttons */}
@@ -122,13 +124,13 @@ function MissionSection() {
               href="/solution"
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-accent text-white font-display font-bold text-base shadow-[0_8px_24px_-6px_rgba(47,107,60,0.35)] hover:shadow-[0_12px_32px_-8px_rgba(47,107,60,0.45)] hover:-translate-y-1 transition-all duration-300"
             >
-              Explore Solution
+              {t('about.exploreSolution')}
             </Link>
             <Link
               href="/team"
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/40 backdrop-blur-md border border-primary/30 text-primary font-display font-bold text-base hover:bg-white/60 hover:border-primary/50 transition-all duration-300"
             >
-              Meet the Team
+              {t('about.meetTeam')}
             </Link>
           </div>
         </div>
@@ -136,10 +138,10 @@ function MissionSection() {
         {/* Values Grid */}
         <div className="grid grid-cols-2 gap-4 md:gap-6">
           {[
-            { icon: '☀️', title: 'Solar Powered', desc: '12V 50W monocrystalline solar panel with battery backup.' },
-            { icon: '📱', title: 'IoT Enabled', desc: 'Real-time monitoring via Android app with Bluetooth control.' },
-            { icon: '🚜', title: 'Multi-Function', desc: 'Plough, sow, weed, spray, and monitor in one device.' },
-            { icon: '🌱', title: 'Sustainable', desc: 'Zero emissions, eco-friendly solution for modern agriculture.' },
+            { icon: '☀️', title: t('about.solarPowered'), desc: t('about.solarDesc') },
+            { icon: '📱', title: t('about.iotEnabled'), desc: t('about.iotDesc') },
+            { icon: '🚜', title: t('about.multiFunction'), desc: t('about.multiDesc') },
+            { icon: '🌱', title: t('about.sustainable'), desc: t('about.sustainableDesc') },
           ].map((item, idx) => (
             <ValueCard key={item.title} item={item} index={idx} />
           ))}
@@ -153,6 +155,7 @@ function MissionSection() {
 function CredentialsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -186,28 +189,28 @@ function CredentialsSection() {
         <div className="relative p-10 md:p-16 text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-accent/30 text-sm font-semibold text-primary mb-4">
             <span className="w-2 h-2 rounded-full bg-accent" />
-            Official Recognition
+            {t('about.officialRecognition')}
           </div>
 
           <h3 className="text-2xl md:text-3xl font-display font-bold text-dark">
-            MSME Registered Startup
+            {t('about.msmeStartup')}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
             <div className="space-y-2">
               <div className="text-3xl font-display font-bold text-gradient-text-hero">✓</div>
-              <p className="text-sm font-semibold text-dark">MSME Registered</p>
-              <p className="text-xs text-light">Government of India</p>
+              <p className="text-sm font-semibold text-dark">{t('about.msmeRegistered')}</p>
+              <p className="text-xs text-light">{t('about.govtOfIndia')}</p>
             </div>
             <div className="space-y-2">
               <div className="text-3xl font-display font-bold text-gradient-text-hero">✓</div>
-              <p className="text-sm font-semibold text-dark">TN-EDII Funded</p>
-              <p className="text-xs text-light">Tamil Nadu Entrepreneurship</p>
+              <p className="text-sm font-semibold text-dark">{t('about.tnediiFunded')}</p>
+              <p className="text-xs text-light">{t('about.tnEntrepreneurship')}</p>
             </div>
             <div className="space-y-2">
               <div className="text-3xl font-display font-bold text-gradient-text-hero">✓</div>
-              <p className="text-sm font-semibold text-dark">Tamil Nadu Based</p>
-              <p className="text-xs text-light">Pioneering Agri-Tech</p>
+              <p className="text-sm font-semibold text-dark">{t('about.tnBased')}</p>
+              <p className="text-xs text-light">{t('about.pioneeringAgriTech')}</p>
             </div>
           </div>
         </div>
@@ -217,6 +220,8 @@ function CredentialsSection() {
 }
 
 export default function AboutPage() {
+  const t = useTranslations();
+
   return (
     <main className="min-h-screen">
       {/* ══════════════════════════════════════════════════════════════ */}
@@ -233,17 +238,17 @@ export default function AboutPage() {
           {/* Subtitle badge */}
           <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-accent/30 text-sm font-semibold text-primary hover:border-accent/60 transition-colors duration-300">
             <span className="w-2 h-2 rounded-full bg-accent" />
-            GREENSPROUT Story
+            {t('about.badge')}
           </div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-display font-extrabold mb-6 leading-tight">
-            <span className="heading-gradient">About GREENSPROUT</span>
+            <span className="heading-gradient">{t('about.heading')}</span>
           </h1>
 
           {/* Subtitle text */}
           <p className="text-lg md:text-xl text-light max-w-2xl mx-auto leading-relaxed mb-8">
-            GREENSPROUT is an innovative agri-tech startup based in Coimbatore, Tamil Nadu, focused on transforming traditional farming through smart automation, renewable energy, and IoT-based solutions. Our flagship innovation, AGRISOLARBOT – A Multi Functional Smart Farming Vehicle – addresses real-world agricultural challenges such as labor shortages, rising costs, and inefficient farming practices.
+            {t('about.heroDesc')}
           </p>
 
           {/* Animated underline */}
@@ -275,20 +280,20 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 space-y-4">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-dark">
-              Our Impact & Commitment
+              {t('about.impactTitle')}
             </h2>
             <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
-              Working towards sustainable transformation of Indian agriculture
+              {t('about.impactDesc')}
             </p>
           </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { number: '1000+', label: 'Farming Hours Saved' },
-              { number: '50%', label: 'Water Reduction' },
-              { number: '100%', label: 'Solar Powered' },
-              { number: '∞', label: 'Potential Impact' },
+              { number: '1000+', label: t('about.farmingHoursSaved') },
+              { number: '50%', label: t('about.waterReduction') },
+              { number: '100%', label: t('about.solarPoweredStat') },
+              { number: '∞', label: t('about.potentialImpact') },
             ].map((stat, idx) => (
               <div
                 key={stat.label}
@@ -315,23 +320,23 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           <div className="glass-panel text-center space-y-6 p-10 md:p-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dark">
-              Ready to Transform Agriculture?
+              {t('about.readyToTransform')}
             </h2>
             <p className="text-light text-base md:text-lg leading-relaxed">
-              Join us in our mission to revolutionize farming through sustainable technology and innovation. Explore our solution or get in touch with our team.
+              {t('about.readyDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link
                 href="/solution"
                 className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-accent text-white font-display font-bold text-base shadow-[0_8px_24px_-6px_rgba(47,107,60,0.35)] hover:shadow-[0_12px_32px_-8px_rgba(47,107,60,0.45)] hover:-translate-y-1 transition-all duration-300"
               >
-                View Solution
+                {t('common.viewSolution')}
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/40 backdrop-blur-md border border-primary/30 text-primary font-display font-bold text-base hover:bg-white/60 hover:border-primary/50 transition-all duration-300"
               >
-                Get in Touch
+                {t('common.getInTouch')}
               </Link>
             </div>
           </div>

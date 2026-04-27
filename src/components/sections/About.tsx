@@ -34,15 +34,15 @@ export default function About() {
     },
     {
       icon: '👥',
-      title: 'Labor Efficiency',
-      description: 'Addressing labor shortages by automating repetitive farming tasks while creating tech employment.',
+      title: 'Multipurpose Efficiency',
+      description: 'Combining five different piece of farming machinery into a single, highly efficient automated platform.',
       geo: 'Agricultural sector',
     },
   ];
 
   const statistics = [
     { number: '60%', label: 'Cost Reduction', context: 'vs. traditional farming' },
-    { number: '40%', label: 'Labor Savings', context: 'per operation cycle' },
+    { number: '40%', label: 'Water Savings', context: 'per operation cycle' },
     { number: '3x', label: 'Efficiency', context: 'crop monitoring improvement' },
     { number: '₹1.92L', label: 'Govt. Funded', context: 'R&D support' },
   ];
@@ -104,7 +104,7 @@ export default function About() {
 
               {/* Description */}
               <p className="text-base sm:text-lg text-dark/70 dark:text-light/80 leading-relaxed mb-4">
-                We are a high-tech agritech startup focused on elevating traditional agriculture. We build sustainable, automated, solar-powered solutions like AGRISOLARBOT to overcome the limitations of manual farming and address labor shortages globally.
+                We are a high-tech agritech startup focused on elevating traditional agriculture. We build sustainable, automated, solar-powered solutions like AGRISOLARBOT to overcome the limitations of manual farming and optimize efficiency globally.
               </p>
 
               {/* GEO indicator */}

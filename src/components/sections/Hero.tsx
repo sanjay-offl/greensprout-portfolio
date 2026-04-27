@@ -4,10 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import FadeIn from '@/components/animations/FadeIn';
+import { useTranslations } from '@/i18n';
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
+  const [isClient, setIsClient] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -79,36 +86,37 @@ export default function Hero() {
                 {/* Badge */}
                 <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm w-fit animate-fade-in">
                   <span className="w-2 h-2 bg-primary rounded-full animate-pulse" aria-hidden="true"></span>
-                  <span className="text-sm font-medium text-primary">Innovating Agriculture</span>
+                  <span className="text-sm font-medium text-primary">{isClient ? t('hero.badge') : ''}</span>
                 </div>
 
                 {/* Heading */}
                 <div className="space-y-4">
                   <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-black tracking-tight leading-tight">
-                    The Future of{' '}
+                    {isClient ? t('hero.title') : ''}{' '}
                     <span className="inline-block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse">
-                      Smart Farming
+                      {isClient ? t('hero.subtitle') : ''}
                     </span>
                   </h1>
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-primary tracking-wide">
-                    AGRISOLARBOT™
-                  </h2>
                 </div>
 
                 {/* Description */}
                 <p className="text-base sm:text-lg text-dark/70 dark:text-light/80 max-w-lg leading-relaxed">
-                  A Bluetooth-controlled, solar-powered smart farming vehicle integrating IoT, automation, and sensors for sustainable agriculture. Engineered for India's agricultural challenges.
+                  {isClient ? t('hero.description') : ''}
                 </p>
 
-                {/* Feature Pills */}
+                {/* Feature Tags */}
                 <div className="flex flex-wrap gap-3 pt-4" role="list">
-                  {['IoT-Enabled', 'Solar-Powered', 'Autonomous'].map((feature) => (
+                  {[
+                    { key: 'featureIoT', label: isClient ? t('hero.featureIoT') : '' },
+                    { key: 'featureSolar', label: isClient ? t('hero.featureSolar') : '' },
+                    { key: 'featureAuto', label: isClient ? t('hero.featureAuto') : '' },
+                  ].map((feature) => (
                     <div
-                      key={feature}
+                      key={feature.key}
                       className="px-4 py-2 rounded-full bg-white/40 dark:bg-white/10 border border-primary/20 backdrop-blur-md text-sm font-medium text-primary/80 dark:text-accent/90"
                       role="listitem"
                     >
-                      ✓ {feature}
+                      ✓ {feature.label}
                     </div>
                   ))}
                 </div>
@@ -121,7 +129,7 @@ export default function Hero() {
                       className="w-full sm:w-auto group"
                       aria-label="Explore the complete AGRISOLARBOT project details"
                     >
-                      <span>Explore Project</span>
+                      <span>{isClient ? t('hero.learnMore') : ''}</span>
                       <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </Button>
                   </Link>
@@ -130,7 +138,7 @@ export default function Hero() {
                       variant="secondary"
                       aria-label="View detailed features and specifications"
                     >
-                      View Features
+                      {isClient ? t('nav.features') : ''}
                     </Button>
                   </Link>
                 </div>
@@ -138,9 +146,9 @@ export default function Hero() {
                 {/* Stats */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-8 border-t border-primary/10 mt-8">
                   {[
-                    { value: '60%', label: 'Cost Reduction' },
-                    { value: '40%', label: 'Labor Saved' },
-                    { value: '3x', label: 'Efficiency Gain' },
+                    { value: '60%', label: 'stats.costReduction' },
+                    { value: '40%', label: 'stats.resourceSavings' },
+                    { value: '3x', label: 'stats.efficiencyGain' },
                   ].map((stat) => (
                     <FadeIn key={stat.label} delay={100}>
                       <div className="text-left">
@@ -148,7 +156,7 @@ export default function Hero() {
                           {stat.value}
                         </p>
                         <p className="text-xs sm:text-sm text-dark/60 dark:text-light/60 font-medium mt-1">
-                          {stat.label}
+                          {isClient ? t(stat.label) : ''}
                         </p>
                       </div>
                     </FadeIn>

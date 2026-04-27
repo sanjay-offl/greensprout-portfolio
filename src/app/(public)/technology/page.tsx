@@ -1,18 +1,18 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslations } from '@/i18n/useTranslations';
 
 const hardware = [
-  ['⚙️', 'High-Efficiency Solar Panel', '12V 50W monocrystalline'],
-  ['🔋', 'Lead Acid Battery', '12V 12Ah backup storage'],
+  ['⚙️', 'High-Efficiency Solar Array', 'Continuous automation power'],
+  ['🔋', 'Energy Backup Storage', 'Extended automated operations'],
   ['⚡', 'High-Torque DC Motors', 'Precision gear motor array'],
-  ['🤖', 'ESP32 Microcontroller', 'Dual-core IoT processing'],
-  ['📡', 'HC-05 Bluetooth Module', 'Low-latency BT communication'],
-  ['🌡️', 'DHT11 Sensor', 'Temperature & humidity tracking'],
+  ['🤖', 'ESP32 Controller Unit', 'Low-latency app communication'],
+  ['📡', 'ESP32 Wireless Hub', 'Low-latency app communication'],
+  ['🌡️', 'Smart Sensing System', 'Real-time field analytics tracking'],
 ];
-
 const software = [
-  ['💻', 'Android Application', 'Custom farmer control interface'],
-  ['🌐', 'IoT Infrastructure', 'Real-time sensor data fusion'],
+  ['💻', 'Unified App', 'Custom farmer control interface'],
+  ['🌐', 'Smart Architecture', 'Real-time sensor data fusion'],
   ['📊', 'Data Dashboard', 'Field monitoring & analytics'],
   ['🧠', 'Automation Logic', 'Trigger-based action processing'],
 ];
@@ -68,6 +68,8 @@ function StackCard({
 }
 
 export default function TechnologyPage() {
+  const t = useTranslations();
+
   return (
     <main className="min-h-screen bg-background">
       {/* ══ HERO SECTION ══ */}
@@ -79,13 +81,13 @@ export default function TechnologyPage() {
 
         <div className="max-w-7xl mx-auto text-center relative z-10 mb-16">
           <div className="inline-block bg-accent/20 text-primary text-xs font-bold px-4 py-2 rounded-full border border-accent/40 mb-8 uppercase tracking-widest">
-            🔧 Engineering Excellence
+            {t('technology.badge')}
           </div>
           <h1 className="text-5xl md:text-7xl font-display font-extrabold tracking-tight leading-tight mb-6 bg-gradient-to-r from-[#111827] via-[#2F6B3C] to-[#6FAF5E] bg-clip-text text-transparent">
-            Technology & Manufacturing
+            {t('technology.heading')}
           </h1>
           <p className="text-xl text-dark/70 max-w-3xl mx-auto leading-relaxed">
-            Advanced mechanical engineering with solar power integration. From concept to field operations—comprehensive hardware, IoT control, and sustainable energy systems powering precision agriculture.
+            {t('technology.desc')}
           </p>
         </div>
       </section>
@@ -102,7 +104,7 @@ export default function TechnologyPage() {
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-2xl">
                     🔧
                   </div>
-                  <h2 className="text-3xl font-display font-bold text-dark">Hardware Stack</h2>
+                  <h2 className="text-3xl font-display font-bold text-dark">{t('technology.hardwareStack')}</h2>
                 </div>
                 <ul className="space-y-3">
                   {hardware.map(([icon, name, spec], idx) => (
@@ -120,7 +122,7 @@ export default function TechnologyPage() {
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center text-white text-2xl">
                     💻
                   </div>
-                  <h2 className="text-3xl font-display font-bold text-dark">Software Stack</h2>
+                  <h2 className="text-3xl font-display font-bold text-dark">{t('technology.softwareStack')}</h2>
                 </div>
                 <ul className="space-y-3">
                   {software.map(([icon, name, spec], idx) => (
@@ -143,18 +145,18 @@ export default function TechnologyPage() {
       <section className="py-20 px-6 bg-white/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold text-dark mb-4">Seamless Integration</h2>
+            <h2 className="text-4xl font-display font-bold text-dark mb-4">{t('technology.seamlessIntegration')}</h2>
             <p className="text-lg text-dark/70">
-              Hardware and software working in perfect harmony for autonomous farming automation.
+              {t('technology.integrationDesc')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Sensors', desc: 'Real-time field monitoring', icon: '📡' },
-              { title: 'Processing', desc: 'AI-powered decisions', icon: '🧠' },
-              { title: 'Communication', desc: 'Instant Bluetooth sync', icon: '📱' },
-              { title: 'Action', desc: 'Precise automation', icon: '⚙️' },
+              { title: t('technology.sensors'), desc: t('technology.sensorsDesc'), icon: '📡' },
+              { title: t('technology.processing'), desc: t('technology.processingDesc'), icon: '🧠' },
+              { title: t('technology.communication'), desc: t('technology.communicationDesc'), icon: '📱' },
+              { title: t('technology.action'), desc: t('technology.actionDesc'), icon: '⚙️' },
             ].map((item, idx) => (
               <div
                 key={item.title}
@@ -168,26 +170,27 @@ export default function TechnologyPage() {
           </div>
         </div>
       </section>
+
       {/* ══ WORKING PRINCIPLE SECTION ══ */}
       <section className="py-20 px-6 border-t border-white/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold text-dark mb-4">How AGRISOLARBOT Works</h2>
+            <h2 className="text-4xl font-display font-bold text-dark mb-4">{t('technology.howItWorks')}</h2>
             <p className="text-lg text-dark/70 max-w-3xl mx-auto">
-              An integrated system combining solar energy, battery storage, microcontroller automation, and electromechanical systems for intelligent farming.
+              {t('technology.howDesc')}
             </p>
           </div>
 
           {/* Working Principle Steps */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="glass-panel p-8 space-y-6">
-              <h3 className="text-2xl font-display font-bold text-primary">Energy & Control System</h3>
+              <h3 className="text-2xl font-display font-bold text-primary">{t('technology.energyControl')}</h3>
               <ul className="space-y-4">
                 {[
-                  { step: '1', desc: 'Solar panels convert sunlight into electrical energy' },
-                  { step: '2', desc: 'Lithium-ion battery stores energy for continuous operation' },
-                  { step: '3', desc: 'ESP32 microcontroller acts as the brain of the system' },
-                  { step: '4', desc: 'Motor drivers and relays manage all motors and pumps' },
+                  { step: '1', desc: 'Solar array ecosystem provides unified automation power' },
+                  { step: '2', desc: 'Energy backup structure stores power for robust continuous operations' },
+                  { step: '3', desc: 'ESP32 controller directs the multipurpose sensing algorithms' },
+                  { step: '4', desc: 'Centralized relay structure activates farming tasks simultaneously' },
                 ].map((item) => (
                   <li key={item.step} className="flex gap-4">
                     <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary flex-shrink-0">
@@ -200,7 +203,7 @@ export default function TechnologyPage() {
             </div>
 
             <div className="glass-panel p-8 space-y-6">
-              <h3 className="text-2xl font-display font-bold text-primary">Farming Operations</h3>
+              <h3 className="text-2xl font-display font-bold text-primary">{t('technology.farmingOps')}</h3>
               <ul className="space-y-4">
                 {[
                   { step: '🚜', desc: 'Soil ploughing using cultivator tools' },
@@ -219,14 +222,14 @@ export default function TechnologyPage() {
 
           {/* Control Flow */}
           <div className="glass-panel-deep p-8 md:p-12 space-y-6">
-            <h3 className="text-2xl font-display font-bold text-dark text-center mb-8">IoT Control Flow</h3>
+            <h3 className="text-2xl font-display font-bold text-dark text-center mb-8">{t('technology.iotControlFlow')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               {[
-                { icon: '📱', label: 'Mobile App', desc: 'Farmer sends commands' },
-                { icon: '📡', label: 'Bluetooth', desc: 'Data transmission' },
-                { icon: '🧠', label: 'ESP32', desc: 'Processes signals' },
-                { icon: '⚙️', label: 'Motors', desc: 'Execute actions' },
-                { icon: '📊', label: 'Sensors', desc: 'Feedback loop' },
+                { icon: '📱', label: 'Ecosystem App', desc: 'Farmer issues operations' },
+                { icon: '📡', label: 'Wireless Hub', desc: 'Encrypted transmission' },
+                { icon: '🧠', label: 'ESP32 Core', desc: 'Processes field analytics' },
+                { icon: '⚙️', label: 'Machinery', desc: 'Fully automated tasks' },
+                { icon: '📊', label: 'Sensing System', desc: 'Rapid feedback metrics' },
               ].map((step, idx) => (
                 <div key={step.label} className="flex flex-col items-center space-y-2">
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center text-2xl">
@@ -246,9 +249,9 @@ export default function TechnologyPage() {
       <section className="py-20 px-6 bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold text-dark mb-4">Development & Manufacturing</h2>
+            <h2 className="text-4xl font-display font-bold text-dark mb-4">{t('technology.devManufacturing')}</h2>
             <p className="text-lg text-dark/70">
-              Structured engineering approach ensuring accuracy, efficiency, and reliability
+              {t('technology.devDesc')}
             </p>
           </div>
 
@@ -257,7 +260,7 @@ export default function TechnologyPage() {
             {/* Methodology */}
             <div className="space-y-6">
               <h3 className="text-2xl font-display font-bold text-dark flex items-center gap-3">
-                <span className="text-3xl">🏗️</span> Structured Methodology
+                {t('technology.methodology')}
               </h3>
               <ul className="space-y-4">
                 {[
@@ -281,7 +284,7 @@ export default function TechnologyPage() {
             {/* Manufacturing Process */}
             <div className="space-y-6">
               <h3 className="text-2xl font-display font-bold text-dark flex items-center gap-3">
-                <span className="text-3xl">🏭</span> Manufacturing Process
+                {t('technology.manufacturing')}
               </h3>
               <ul className="space-y-4">
                 {[
@@ -305,13 +308,13 @@ export default function TechnologyPage() {
 
           {/* Quality Assurance */}
           <div className="mt-12 glass-panel p-8 md:p-12 space-y-6">
-            <h3 className="text-2xl font-display font-bold text-dark text-center">Quality Assurance</h3>
+            <h3 className="text-2xl font-display font-bold text-dark text-center">{t('technology.qualityAssurance')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
-                { icon: '✓', title: 'Structural Strength', desc: 'Robust welding ensures durability' },
-                { icon: '⚡', title: 'Electrical Safety', desc: 'Tested for proper component operation' },
-                { icon: '⚙️', title: 'Mechanical Precision', desc: 'Accurate alignment for smooth movement' },
-                { icon: '🧪', title: 'Field Performance', desc: 'Real-world testing validates reliability' },
+                { icon: '✓', title: t('technology.structuralStrength'), desc: t('technology.structuralDesc') },
+                { icon: '⚡', title: t('technology.electricalSafety'), desc: t('technology.electricalDesc') },
+                { icon: '⚙️', title: t('technology.mechanicalPrecision'), desc: t('technology.mechanicalDesc') },
+                { icon: '🧪', title: t('technology.fieldPerformance'), desc: t('technology.fieldDesc') },
               ].map((qa) => (
                 <div key={qa.title} className="text-center space-y-3">
                   <div className="text-4xl">{qa.icon}</div>
@@ -327,4 +330,3 @@ export default function TechnologyPage() {
     </main>
   );
 }
-

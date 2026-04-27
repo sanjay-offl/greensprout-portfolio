@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from '@/i18n/useTranslations';
 
 /* ── Contact Info Card Component ─────── */
 function ContactInfoCard({ item, index }: { item: { icon: string; label: string; content: React.ReactNode }; index: number }) {
@@ -66,6 +67,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -87,7 +89,7 @@ export default function ContactPage() {
   const contactInfo = [
     {
       icon: '📧',
-      label: 'Email',
+      label: t('contact.email'),
       content: (
         <a
           href="mailto:greensprout2k25@gmail.com"
@@ -99,17 +101,17 @@ export default function ContactPage() {
     },
     {
       icon: '📞',
-      label: 'Phone',
+      label: t('contact.phone'),
       content: '+91 9363982789',
     },
     {
       icon: '📍',
-      label: 'Address',
+      label: t('contact.address'),
       content: 'PPG Institute of Technology, Saravanampatti, Coimbatore, Tamil Nadu 641035',
     },
     {
       icon: '📜',
-      label: 'MSME No.',
+      label: t('contact.msmeNo'),
       content: 'UDYAM-TN-03-0253916',
     },
   ];
@@ -130,17 +132,17 @@ export default function ContactPage() {
           {/* Subtitle badge */}
           <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-accent/30 text-sm font-semibold text-primary hover:border-accent/60 transition-colors duration-300">
             <span className="w-2 h-2 rounded-full bg-accent" />
-            Get In Touch
+            {t('contact.badge')}
           </div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-display font-extrabold mb-6 leading-tight">
-            <span className="heading-gradient">Contact Us</span>
+            <span className="heading-gradient">{t('contact.heroHeading')}</span>
           </h1>
 
           {/* Subtitle text */}
           <p className="text-lg md:text-xl text-light max-w-2xl mx-auto leading-relaxed mb-8">
-            Interested in investing, partnering, or pre-ordering AGRISOLARBOT? We&apos;d love to connect with you and explore opportunities together.
+            {t('contact.heroDesc')}
           </p>
 
           {/* Animated underline */}
@@ -154,10 +156,10 @@ export default function ContactPage() {
       <section className="px-6 py-20 md:py-32 max-w-7xl mx-auto">
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
-            Get in Touch
+            {t('contact.getInTouch')}
           </h2>
           <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
-            Reach out through any of these channels
+            {t('contact.reachOut')}
           </p>
         </div>
 
@@ -180,15 +182,15 @@ export default function ContactPage() {
             <div className="relative p-8 md:p-12 text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-primary/30 text-sm font-bold text-primary mb-4">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                Officially Recognized
+                {t('contact.officiallyRecognized')}
               </div>
 
               <h3 className="text-xl md:text-2xl font-display font-bold text-dark">
-                TN-EDII Approved · ₹1,92,000 Funded
+                {t('contact.tnediiApproved')}
               </h3>
 
               <p className="text-sm md:text-base text-light max-w-2xl mx-auto leading-relaxed pt-2">
-                GREENSPROUT is funded under the Innovation Voucher Program (IVP) of the Entrepreneurship Development and Innovation Institute, Tamil Nadu, India.
+                {t('contact.tnediiDesc')}
               </p>
             </div>
           </div>
@@ -224,10 +226,10 @@ export default function ContactPage() {
                 {/* Message */}
                 <div>
                   <h3 className="text-3xl md:text-4xl font-display font-bold text-dark mb-3">
-                    Message Sent!
+                    {t('contact.messageSent')}
                   </h3>
                   <p className="text-base md:text-lg text-light leading-relaxed">
-                    Thank you for reaching out. We&apos;ll get back to you within 24 hours at{' '}
+                    {t('contact.thankYou')}{' '}
                     <strong className="text-primary font-semibold">greensprout2k25@gmail.com</strong>.
                   </p>
                 </div>
@@ -237,17 +239,17 @@ export default function ContactPage() {
                   onClick={() => setSubmitted(false)}
                   className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-accent text-white font-display font-bold text-base shadow-[0_8px_24px_-6px_rgba(47,107,60,0.35)] hover:shadow-[0_12px_32px_-8px_rgba(47,107,60,0.45)] hover:-translate-y-1 transition-all duration-300 mt-6"
                 >
-                  Send Another Message
+                  {t('common.sendAnother')}
                 </button>
               </div>
             ) : (
               <div className="glass-panel p-8 md:p-12">
                 <div className="mb-8">
                   <h2 className="text-2xl md:text-3xl font-display font-bold text-dark mb-2">
-                    Send us a Message
+                    {t('contact.sendMessage')}
                   </h2>
                   <p className="text-light text-base">
-                    Fill out the form below and we&apos;ll get back to you shortly
+                    {t('contact.sendDesc')}
                   </p>
                 </div>
 
@@ -261,13 +263,13 @@ export default function ContactPage() {
                   {/* Name Field */}
                   <div className="space-y-2">
                     <label htmlFor="name" className="block text-sm font-semibold text-dark">
-                      Full Name <span className="text-primary">*</span>
+                      {t('contact.fullName')} <span className="text-primary">*</span>
                     </label>
                     <input
                       id="name"
                       type="text"
                       required
-                      placeholder="Your full name"
+                      placeholder={t('contact.namePlaceholder')}
                       className="w-full bg-white/60 border border-white/40 rounded-2xl px-5 py-3.5 text-base text-dark backdrop-blur-md transition-all duration-300 placeholder:text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white/80 hover:border-primary/30 hover:bg-white/70"
                     />
                   </div>
@@ -275,7 +277,7 @@ export default function ContactPage() {
                   {/* Email Field */}
                   <div className="space-y-2">
                     <label htmlFor="email" className="block text-sm font-semibold text-dark">
-                      Email Address <span className="text-primary">*</span>
+                      {t('contact.emailAddress')} <span className="text-primary">*</span>
                     </label>
                     <input
                       id="email"
@@ -289,31 +291,31 @@ export default function ContactPage() {
                   {/* Inquiry Type */}
                   <div className="space-y-2">
                     <label htmlFor="inquiry" className="block text-sm font-semibold text-dark">
-                      Nature of Inquiry
+                      {t('contact.inquiryType')}
                     </label>
                     <select
                       id="inquiry"
                       className="w-full bg-white/60 border border-white/40 rounded-2xl px-5 py-3.5 text-base text-dark backdrop-blur-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white/80 hover:border-primary/30 hover:bg-white/70 appearance-none cursor-pointer"
                     >
-                      <option>Investment / Funding</option>
-                      <option>Research Partnership</option>
-                      <option>Pre-order / Purchase</option>
-                      <option>Media / Press</option>
-                      <option>General Inquiry</option>
-                      <option>Collaboration</option>
+                      <option>{t('contact.investment')}</option>
+                      <option>{t('contact.research')}</option>
+                      <option>{t('contact.purchase')}</option>
+                      <option>{t('contact.media')}</option>
+                      <option>{t('contact.general')}</option>
+                      <option>{t('contact.collaboration')}</option>
                     </select>
                   </div>
 
                   {/* Message Field */}
                   <div className="space-y-2">
                     <label htmlFor="message" className="block text-sm font-semibold text-dark">
-                      Message <span className="text-primary">*</span>
+                      {t('contact.message')} <span className="text-primary">*</span>
                     </label>
                     <textarea
                       id="message"
                       required
                       rows={6}
-                      placeholder="Tell us about your interest in AGRISOLARBOT and how we can help..."
+                      placeholder={t('contact.messagePlaceholder')}
                       className="w-full bg-white/60 border border-white/40 rounded-2xl px-5 py-3.5 text-base text-dark backdrop-blur-md transition-all duration-300 placeholder:text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white/80 hover:border-primary/30 hover:bg-white/70 resize-none"
                     />
                   </div>
@@ -323,13 +325,13 @@ export default function ContactPage() {
                     type="submit"
                     className="w-full bg-gradient-to-r from-primary to-accent text-white font-display font-bold py-4 rounded-2xl shadow-[0_8px_24px_-6px_rgba(47,107,60,0.35)] hover:shadow-[0_12px_32px_-8px_rgba(47,107,60,0.45)] hover:-translate-y-1 transition-all duration-300 text-lg mt-2"
                   >
-                    Send Message →
+                    {t('common.sendMessage')}
                   </button>
 
                   {/* Alternative Contact */}
                   <div className="text-center pt-4 border-t border-white/20">
                     <p className="text-sm text-light">
-                      Prefer email?{' '}
+                      {t('contact.preferEmail')}{' '}
                       <a
                         href="mailto:greensprout2k25@gmail.com"
                         className="text-primary hover:text-accent font-semibold transition-colors duration-200"
@@ -352,23 +354,23 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto">
           <div className="glass-panel text-center space-y-6 p-10 md:p-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dark">
-              Have Questions?
+              {t('contact.haveQuestions')}
             </h2>
             <p className="text-light text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-              Our team is here to help. Whether you want to invest, partner with us, or learn more about AGRISOLARBOT, we&apos;re ready to discuss your needs.
+              {t('contact.questionsDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <a
                 href="tel:+919363982789"
                 className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-accent text-white font-display font-bold text-base shadow-[0_8px_24px_-6px_rgba(47,107,60,0.35)] hover:shadow-[0_12px_32px_-8px_rgba(47,107,60,0.45)] hover:-translate-y-1 transition-all duration-300"
               >
-                Call Us
+                {t('common.callUs')}
               </a>
               <a
                 href="/#"
                 className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/40 backdrop-blur-md border border-primary/30 text-primary font-display font-bold text-base hover:bg-white/60 hover:border-primary/50 transition-all duration-300"
               >
-                Learn More
+                {t('common.learnMore')}
               </a>
             </div>
           </div>

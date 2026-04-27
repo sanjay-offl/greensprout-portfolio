@@ -2,51 +2,16 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import FadeIn from '@/components/animations/FadeIn';
-
-interface Stat {
-  value: string;
-  label: string;
-  color?: string;
-  context?: string;
-}
-
-interface Feature {
-  icon: string;
-  title: string;
-  desc: string;
-  geo: string;
-}
-
-interface Organization {
-  name: string;
-  sub: string;
-  icon: string;
-  achieved?: string;
-}
-
-const stats: Stat[] = [
-  { value: '60%', label: 'Cost Reduction', color: '#FF6B6B', context: 'vs. traditional farming' },
-  { value: '40%', label: 'Resource Savings', color: '#FFA94D', context: 'water & fuel efficiency' },
-  { value: '3×', label: 'Efficiency Gain', color: '#74C0FC', context: 'task completion speed' },
-  { value: '₹1.92L', label: 'Govt. Funded', color: '#9775FA', context: 'R&D support secured' },
-];
-
-const features: Feature[] = [
-  { icon: '☀️', title: 'Solar Powered', desc: '12V 50W panel, zero fuel', geo: 'India-wide' },
-  { icon: '📱', title: 'Bluetooth Control', desc: 'Android app navigation', geo: 'Rural areas' },
-  { icon: '📡', title: 'IoT Sensors', desc: 'Real-time soil data', geo: 'Tamil Nadu' },
-  { icon: '🚜', title: 'Fully Automated', desc: 'Plough, sow, spray', geo: 'All crops' },
-];
-
-const organizations: Organization[] = [
-  { name: 'Government of India', sub: 'Ministry of MSME', icon: '🇮🇳', achieved: 'Official Recognition' },
-  { name: 'TN-EDII', sub: 'Innovation Voucher Program', icon: '🏛️', achieved: 'State Support' },
-  { name: 'NGI TBI', sub: 'Knowledge Partner', icon: '🤝', achieved: 'Mentorship & Network' },
-  { name: 'PPG Institute', sub: 'Technology Host', icon: '🎓', achieved: 'Incubation Hub' },
-];
+import { useTranslations } from '@/i18n';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+  const t = useTranslations();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -89,7 +54,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 w-fit mx-auto">
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse" aria-hidden="true"></span>
                 <span className="text-xs sm:text-sm font-semibold text-primary dark:text-accent">
-                  🌍 Transforming Indian Agriculture
+                  {isClient ? t('home.mainBadge') : ''}
                 </span>
               </div>
 
@@ -106,7 +71,7 @@ export default function Home() {
 
               {/* Description */}
               <p className="text-base sm:text-lg text-dark/70 dark:text-light/80 max-w-2xl mx-auto leading-relaxed">
-                A solar-powered, IoT-enabled autonomous farming vehicle that reduces labor, improves efficiency, and enables sustainable agriculture across India.
+                {isClient ? t('home.mainDescription') : ''}
               </p>
 
               {/* CTA buttons */}
@@ -116,7 +81,7 @@ export default function Home() {
                   className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-accent text-white font-display font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   aria-label="Explore the complete AGRISOLARBOT solution"
                 >
-                  <span>Explore Project</span>
+                  <span>{isClient ? t('home.exploreCTA') : ''}</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
                 <Link
@@ -124,13 +89,18 @@ export default function Home() {
                   className="inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-white/10 text-primary dark:text-accent font-display font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-primary/30 dark:border-accent/30 hover:border-primary/60 dark:hover:border-accent/60 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-white/20 transition-all duration-300"
                   aria-label="View all features and specifications"
                 >
-                  View Features
+                  {isClient ? t('home.viewFeatures') : ''}
                 </Link>
               </div>
 
               {/* Stats Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-8 sm:pt-12 max-w-3xl mx-auto w-full">
-                {stats.map((s, idx) => (
+                {[
+                  { value: '60%', label: 'stats.costReduction', color: '#FF6B6B', context: 'stats.costReductionContext' },
+                  { value: '40%', label: 'stats.resourceSavings', color: '#FFA94D', context: 'stats.resourceSavingsContext' },
+                  { value: '3×', label: 'stats.efficiencyGain', color: '#74C0FC', context: 'stats.efficiencyGainContext' },
+                  { value: '₹1.92L', label: 'stats.govtFunded', color: '#9775FA', context: 'stats.govtFundedContext' },
+                ].map((s, idx) => (
                   <FadeIn key={s.label} delay={idx * 100}>
                     <div className="text-center">
                       <p
@@ -140,9 +110,9 @@ export default function Home() {
                         {s.value}
                       </p>
                       <p className="text-xs sm:text-sm font-bold text-dark/60 dark:text-light/60 mt-2 leading-tight">
-                        {s.label}
+                        {isClient ? t(s.label) : ''}
                       </p>
-                      <p className="text-xs text-dark/50 dark:text-light/50 mt-1">{s.context}</p>
+                      <p className="text-xs text-dark/50 dark:text-light/50 mt-1">{isClient ? t(s.context) : ''}</p>
                     </div>
                   </FadeIn>
                 ))}
@@ -166,17 +136,22 @@ export default function Home() {
           <FadeIn>
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dark dark:text-white mb-4">
-                Platform Capabilities
+                {isClient ? t('features.platformCapabilities') : ''}
               </h2>
               <p className="text-base sm:text-lg text-dark/70 dark:text-light/75 max-w-2xl mx-auto">
-                Integrated technology stack built for Indian farming challenges
+                {isClient ? t('features.platformDesc') : ''}
               </p>
             </div>
           </FadeIn>
 
           {/* Features Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {features.map((feature, idx) => (
+            {[
+              { icon: '☀️', title: 'features.solar', desc: 'features.solarDesc', geo: 'features.indiawideGeo' },
+              { icon: '📱', title: 'features.esp32Control', desc: 'features.esp32Desc', geo: 'features.ruralAreasGeo' },
+              { icon: '📡', title: 'features.iot', desc: 'features.iotDesc', geo: 'features.tamilNaduGeo' },
+              { icon: '🚜', title: 'features.automation', desc: 'features.automationDesc', geo: 'features.allCropsGeo' },
+            ].map((feature, idx) => (
               <FadeIn key={feature.title} delay={idx * 100}>
                 <div className="group relative bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-primary/10 hover:border-primary/30 dark:border-white/5 dark:hover:border-accent/30 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-2xl transition-all duration-500 h-full flex flex-col hover:scale-[1.02] hover:-translate-y-2">
                   {/* Top accent bar */}
@@ -195,17 +170,17 @@ export default function Home() {
 
                   {/* Title */}
                   <h3 className="text-lg sm:text-xl font-display font-bold text-dark dark:text-white mb-2 leading-snug">
-                    {feature.title}
+                    {isClient ? t(feature.title) : ''}
                   </h3>
 
                   {/* Description */}
                   <p className="text-xs sm:text-sm text-dark/70 dark:text-light/70 leading-relaxed flex-1 mb-4">
-                    {feature.desc}
+                    {isClient ? t(feature.desc) : ''}
                   </p>
 
                   {/* GEO Tag */}
                   <div className="flex items-center gap-2 text-xs font-bold text-primary/70 dark:text-accent/70">
-                    <span>📍 {feature.geo}</span>
+                    <span>📍 {isClient ? t(feature.geo) : ''}</span>
                   </div>
                 </div>
               </FadeIn>
@@ -226,22 +201,18 @@ export default function Home() {
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 w-fit">
                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse" aria-hidden="true"></span>
                     <span className="text-xs sm:text-sm font-bold text-primary dark:text-accent uppercase tracking-wide">
-                      About GREENSPROUT
+                      {isClient ? t('home.aboutBadge') : ''}
                     </span>
                   </div>
 
                   {/* Heading */}
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dark dark:text-white leading-tight">
-                    Innovating Agriculture
-                    <br />
-                    <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                      from the Ground Up
-                    </span>
+                    {isClient ? t('home.aboutHeading') : ''}
                   </h2>
 
                   {/* Description */}
                   <p className="text-base sm:text-lg text-dark/70 dark:text-light/75 leading-relaxed">
-                    GREENSPROUT is an innovative agri-tech startup developing solar-powered, Bluetooth-controlled smart farming vehicles that automate agricultural processes efficiently and economically for India's farming sector.
+                    {isClient ? t('home.aboutDesc') : ''}
                   </p>
 
                   {/* CTA */}
@@ -250,7 +221,7 @@ export default function Home() {
                     className="inline-flex items-center gap-2 group font-display font-bold text-primary dark:text-accent border-2 border-primary/30 dark:border-accent/30 px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:border-primary/60 dark:hover:border-accent/60 hover:bg-primary/5 dark:hover:bg-accent/5 transition-all duration-300"
                     aria-label="Learn more about GREENSPROUT startup"
                   >
-                    <span>Learn More</span>
+                    <span>{isClient ? t('home.learnMoreAbout') : ''}</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                 </div>
@@ -258,10 +229,10 @@ export default function Home() {
                 {/* Right: Stats Grid */}
                 <div className="grid grid-cols-2 gap-4 sm:gap-6">
                   {[
-                    { icon: '🌱', val: '146M+', label: 'Target Farms', geo: 'India' },
-                    { icon: '💰', val: '₹1.92L', label: 'Govt. Funding', geo: 'Secured' },
-                    { icon: '⚡', val: '40%', label: 'Resources Saved', geo: 'Per operation' },
-                    { icon: '🚀', val: '8 mos', label: 'Dev Timeline', geo: 'Achieved' },
+                    { icon: '🌱', val: '146M+', label: 'home.targetFarms', geo: 'home.india' },
+                    { icon: '💰', val: '₹1.92L', label: 'home.govtFunding', geo: 'home.secured' },
+                    { icon: '⚡', val: '40%', label: 'home.resourcesSaved', geo: 'home.perOperation' },
+                    { icon: '🚀', val: '8 mos', label: 'home.devTimeline', geo: 'home.achieved' },
                   ].map((item, idx) => (
                     <FadeIn key={item.label} delay={idx * 100}>
                       <div className="group relative bg-white/70 dark:bg-white/10 backdrop-blur-xl rounded-2xl p-6 sm:p-8 text-center shadow-sm hover:shadow-lg border border-primary/10 dark:border-white/5 hover:border-primary/30 dark:hover:border-accent/30 transition-all duration-300 hover:scale-[1.05] hover:-translate-y-1">
@@ -275,10 +246,10 @@ export default function Home() {
                           {item.val}
                         </div>
                         <p className="text-xs sm:text-sm font-bold text-dark/70 dark:text-light/70 mb-1">
-                          {item.label}
+                          {isClient ? t(item.label) : ''}
                         </p>
                         <p className="text-xs text-primary/60 dark:text-accent/60 font-semibold">
-                          📍 {item.geo}
+                          📍 {isClient ? t(item.geo) : ''}
                         </p>
                       </div>
                     </FadeIn>
@@ -297,17 +268,22 @@ export default function Home() {
           <FadeIn>
             <div className="text-center mb-10 sm:mb-14">
               <p className="text-xs sm:text-sm font-bold text-primary/70 dark:text-accent/70 uppercase tracking-widest mb-4">
-                Official Recognition & Support
+                {isClient ? t('home.recognition') : ''}
               </p>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black text-dark dark:text-white">
-                Trusted by Government & Institutions
+                {isClient ? t('home.trustedByGov') : ''}
               </h2>
             </div>
           </FadeIn>
 
           {/* Organizations Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {organizations.map((org, idx) => (
+            {[
+              { name: 'organizations.government', sub: 'organizations.governmentSub', icon: '🇮🇳', achieved: 'organizations.governmentAchieved' },
+              { name: 'organizations.tnedii', sub: 'organizations.tnediiSub', icon: '🏛️', achieved: 'organizations.tnediiAchieved' },
+              { name: 'organizations.ngi', sub: 'organizations.ngiSub', icon: '🤝', achieved: 'organizations.ngiAchieved' },
+              { name: 'organizations.ppg', sub: 'organizations.ppgSub', icon: '🎓', achieved: 'organizations.ppgAchieved' },
+            ].map((org, idx) => (
               <FadeIn key={org.name} delay={idx * 100}>
                 <div className="group relative bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-primary/10 hover:border-primary/30 dark:border-white/5 dark:hover:border-accent/30 rounded-2xl p-6 sm:p-8 text-center transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 hover:shadow-lg">
                   {/* Top accent */}
@@ -320,17 +296,17 @@ export default function Home() {
 
                   {/* Organization name */}
                   <h3 className="font-display font-bold text-dark dark:text-white text-sm sm:text-base mb-1">
-                    {org.name}
+                    {isClient ? t(org.name) : ''}
                   </h3>
 
                   {/* Subtitle */}
                   <p className="text-xs text-dark/70 dark:text-light/70 mb-3 leading-snug">
-                    {org.sub}
+                    {isClient ? t(org.sub) : ''}
                   </p>
 
                   {/* Achievement badge */}
                   <div className="inline-block px-3 py-1.5 rounded-full text-xs font-bold bg-primary/10 dark:bg-primary/20 text-primary dark:text-accent border border-primary/20 dark:border-primary/30">
-                    ✓ {org.achieved}
+                    ✓ {isClient ? t(org.achieved) : ''}
                   </div>
                 </div>
               </FadeIn>
@@ -342,16 +318,16 @@ export default function Home() {
             <div className="mt-12 sm:mt-16 pt-8 sm:pt-12 border-t border-primary/10 dark:border-primary/20">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
                 {[
-                  { icon: '📜', val: 'MSME Registered', desc: 'Ministry of MSME' },
-                  { icon: '🏆', val: 'Innovation Voucher', desc: 'TN-EDII Program' },
-                  { icon: '🤝', val: 'Knowledge Partners', desc: '10+ Institutions' },
+                  { icon: '📜', val: 'home.msmeReg', desc: 'home.msmeDesc' },
+                  { icon: '🏆', val: 'home.innovationVoucher', desc: 'home.innovationDesc' },
+                  { icon: '🤝', val: 'home.knowledgePartners', desc: 'home.partnersDesc' },
                 ].map((indicator, idx) => (
                   <div key={indicator.val} className="space-y-2">
                     <div className="text-3xl sm:text-4xl">{indicator.icon}</div>
                     <p className="font-display font-bold text-dark dark:text-white text-sm sm:text-base">
-                      {indicator.val}
+                      {isClient ? t(indicator.val) : ''}
                     </p>
-                    <p className="text-xs text-dark/60 dark:text-light/60">{indicator.desc}</p>
+                    <p className="text-xs text-dark/60 dark:text-light/60">{isClient ? t(indicator.desc) : ''}</p>
                   </div>
                 ))}
               </div>
@@ -371,11 +347,11 @@ export default function Home() {
 
               <div className="relative z-10 space-y-6 text-center">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black leading-tight">
-                  Ready to Transform Farming?
+                  {isClient ? t('home.finalCTA') : ''}
                 </h2>
 
                 <p className="text-base sm:text-lg text-white/90 leading-relaxed">
-                  Join the agricultural revolution. AGRISOLARBOT is engineered for Indian farmers, tested for Indian farming conditions, and ready to scale nationwide.
+                  {isClient ? t('home.finalDesc') : ''}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
@@ -383,13 +359,13 @@ export default function Home() {
                     href="/contact"
                     className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-white text-primary font-display font-bold hover:scale-105 hover:shadow-lg transition-all duration-300 text-sm sm:text-base"
                   >
-                    Get in Touch
+                    {isClient ? t('home.getInTouch') : ''}
                   </Link>
                   <Link
                     href="/solution"
                     className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white text-white font-display font-bold hover:bg-white/10 transition-all duration-300 text-sm sm:text-base"
                   >
-                    Explore Solution
+                    {isClient ? t('home.exploreSolution') : ''}
                   </Link>
                 </div>
               </div>

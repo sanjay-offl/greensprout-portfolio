@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import ProgressBar from '@/components/ui/ProgressBar';
+import { LanguageProvider } from '@/i18n';
 
 export const metadata: Metadata = {
   title: 'GREENSPROUT | AGRISOLARBOT – Smart Solar Farming Vehicle',
-  description: 'GREENSPROUT is a government-recognized agri-tech startup from Tamil Nadu, India, building AGRISOLARBOT — a solar-powered, Bluetooth-controlled smart farming vehicle with IoT sensors.',
-  keywords: 'smart farming India, solar agriculture Tamil Nadu, agri automation startup, AGRISOLARBOT, farming robot India, IoT agriculture Coimbatore, MSME agri-tech',
+  description: 'GREENSPROUT is a government-recognized agri-tech startup from Tamil Nadu, India, building AGRISOLARBOT — a solar-powered, ESP32-controlled fully automated multipurpose farming vehicle with smart sensing systems.',
+  keywords: 'smart farming India, solar agriculture Tamil Nadu, fully automated farming, AGRISOLARBOT, multipurpose farming robot, smart sensing agriculture Coimbatore, MSME agri-tech',
   authors: [{ name: 'GREENSPROUT Pvt. Ltd.' }],
   openGraph: {
     title: 'GREENSPROUT | AGRISOLARBOT – Smart Solar Farming Vehicle',
@@ -36,11 +37,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ta">
       <body className="bg-background text-dark antialiased">
-        {/* Top navigation progress bar — shows on every route change */}
-        <ProgressBar />
-        {children}
+        <LanguageProvider>
+          {/* Top navigation progress bar — shows on every route change */}
+          <ProgressBar />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

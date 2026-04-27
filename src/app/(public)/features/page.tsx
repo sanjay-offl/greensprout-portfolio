@@ -1,11 +1,13 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from '@/i18n/useTranslations';
 
 /* ── Feature Card Component ─────── */
 function FeatureCard({ item, index }: { item: { icon: string; title: string; desc: string }; index: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -67,7 +69,7 @@ function FeatureCard({ item, index }: { item: { icon: string; title: string; des
           {/* Feature badge */}
           <div className="inline-flex items-center gap-2 w-fit px-3 py-2 rounded-full bg-white/40 backdrop-blur-md border border-accent/20 text-xs font-semibold text-primary group-hover:border-accent/50 group-hover:bg-white/60 transition-all duration-300 mt-2">
             <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            Integrated
+            {t('common.integrated')}
           </div>
         </div>
       </div>
@@ -78,6 +80,7 @@ function FeatureCard({ item, index }: { item: { icon: string; title: string; des
 export default function FeaturesPage() {
   const [isCtaVisible, setIsCtaVisible] = useState(false);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -97,46 +100,14 @@ export default function FeaturesPage() {
   }, []);
 
   const features = [
-    {
-      icon: '🌱',
-      title: 'Automated Ploughing',
-      desc: 'Deep soil preparation with adjustable blades optimized for varied crop types and field conditions.'
-    },
-    {
-      icon: '🌾',
-      title: 'Precision Seeding',
-      desc: 'Uniform seed dispersal at calibrated depths ensuring optimal germination and yield density.'
-    },
-    {
-      icon: '🌿',
-      title: 'Intelligent Weeding',
-      desc: 'Targeted weed removal between crop rows, protecting plant health without manual intervention.'
-    },
-    {
-      icon: '💦',
-      title: 'Smart Irrigation',
-      desc: 'Sensor-triggered precision water delivery, eliminating over-watering and conserving up to 40% water.'
-    },
-    {
-      icon: '🌫️',
-      title: 'Automated Spraying',
-      desc: 'Precisely timed pesticide and fertilizer spray based on real-time crop health sensor data.'
-    },
-    {
-      icon: '☀️',
-      title: 'Solar Powered',
-      desc: 'Zero-fuel renewable 12V 50W solar panel system with battery backup for extended operation.'
-    },
-    {
-      icon: '📱',
-      title: 'Bluetooth Control',
-      desc: 'Seamless manual and auto navigation via a dedicated custom Android application for farmers.'
-    },
-    {
-      icon: '📡',
-      title: 'IoT Sensor Array',
-      desc: 'Real-time soil moisture, temperature, and humidity monitoring with dashboard alerts.'
-    },
+    { icon: '🌱', title: t('featuresPage.ploughing'), desc: t('featuresPage.ploughDesc') },
+    { icon: '🌾', title: t('featuresPage.seeding'), desc: t('featuresPage.seedDesc') },
+    { icon: '🌿', title: t('featuresPage.weeding'), desc: t('featuresPage.weedDesc') },
+    { icon: '💦', title: t('featuresPage.irrigation'), desc: t('featuresPage.irrigDesc') },
+    { icon: '🌫️', title: t('featuresPage.spraying'), desc: t('featuresPage.sprayDesc') },
+    { icon: '☀️', title: t('featuresPage.solarFeature'), desc: t('featuresPage.solarFeatDesc') },
+    { icon: '📱', title: t('featuresPage.btControl'), desc: t('featuresPage.btDesc') },
+    { icon: '📡', title: t('featuresPage.iotArray'), desc: t('featuresPage.iotArrayDesc') },
   ];
 
   return (
@@ -155,17 +126,17 @@ export default function FeaturesPage() {
           {/* Subtitle badge */}
           <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-accent/30 text-sm font-semibold text-primary hover:border-accent/60 transition-colors duration-300">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            AGRISOLARBOT Capabilities
+            {t('featuresPage.badge')}
           </div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-display font-extrabold mb-6 leading-tight">
-            <span className="heading-gradient">Eight Integrated Features</span>
+            <span className="heading-gradient">{t('featuresPage.heading')}</span>
           </h1>
 
           {/* Subtitle text */}
           <p className="text-lg md:text-xl text-light max-w-2xl mx-auto leading-relaxed mb-8">
-            Comprehensive automation from ploughing to spraying, powered by renewable solar energy and intelligent IoT sensors for India's small-scale farmers.
+            {t('featuresPage.desc')}
           </p>
 
           {/* Animated underline */}
@@ -180,10 +151,10 @@ export default function FeaturesPage() {
         {/* Section intro */}
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
-            Comprehensive Automation Suite
+            {t('featuresPage.automationSuite')}
           </h2>
           <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
-            Each feature works independently or as part of our integrated system, adapting to your farm's specific needs.
+            {t('featuresPage.suiteDesc')}
           </p>
         </div>
 
@@ -197,10 +168,10 @@ export default function FeaturesPage() {
         {/* Features Overview Stats */}
         <div className="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {[
-            { number: '8', label: 'Key Features' },
-            { number: '40%', label: 'Water Saved' },
-            { number: '100%', label: 'Solar Powered' },
-            { number: '24/7', label: 'IoT Monitoring' },
+            { number: '8', label: t('featuresPage.keyFeatures') },
+            { number: '40%', label: t('featuresPage.waterSaved') },
+            { number: '100%', label: t('features.solar') },
+            { number: '24/7', label: t('featuresPage.iotMonitoring') },
           ].map((stat, idx) => (
             <div
               key={stat.label}
@@ -223,10 +194,10 @@ export default function FeaturesPage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
-              Feature Categories
+              {t('featuresPage.featureCategories')}
             </h2>
             <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
-              Our capabilities span farming operations, energy systems, and smart connectivity.
+              {t('featuresPage.categoriesDesc')}
             </p>
           </div>
 
@@ -234,18 +205,18 @@ export default function FeaturesPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
-                title: 'Farming Operations',
+                title: t('featuresPage.farmingOps'),
                 features: ['Ploughing', 'Seeding', 'Weeding', 'Irrigation', 'Spraying'],
                 icon: '🚜',
               },
               {
-                title: 'Energy & Sustainability',
+                title: t('featuresPage.energySustainability'),
                 features: ['Solar Powered', 'Battery Backup', 'Zero-Emission', 'Cost Efficient', 'Eco-Friendly'],
                 icon: '☀️',
               },
               {
-                title: 'Intelligence & Control',
-                features: ['IoT Sensors', 'Bluetooth App', 'Real-Time Data', 'Smart Alerts', 'Digital Monitoring'],
+                title: t('featuresPage.intelligenceControl'),
+                features: ['Smart Sensing System', 'ESP32 Controller', 'Real-Time Precision', 'Automated Triggers', 'Ecosystem Flow'],
                 icon: '📡',
               },
             ].map((category, idx) => (
@@ -291,25 +262,25 @@ export default function FeaturesPage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
-              Key Advantages
+              {t('featuresPage.keyAdvantages')}
             </h2>
             <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
-              AGRISOLARBOT delivers comprehensive benefits for modern sustainable farming
+              {t('featuresPage.advantagesDesc')}
             </p>
           </div>
 
           {/* Advantages Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {[
-              { icon: '🌱', title: 'Renewable Energy', desc: 'Uses renewable solar energy, reducing fuel dependency and environmental impact.' },
-              { icon: '💰', title: 'Cost-Effective', desc: 'Operating costs drop 60% compared to traditional diesel machinery.' },
-              { icon: '⏱️', title: 'Time Efficient', desc: 'Covers 0.3 to 0.7 acres per hour with precision automation.' },
-              { icon: '💧', title: 'Water Conservation', desc: 'Reduces water wastage by up to 40% through precision irrigation.' },
-              { icon: '🎯', title: 'Precision Farming', desc: 'Improved seed placement accuracy and efficient resource usage.' },
-              { icon: '👥', title: 'Labor Reduction', desc: 'Reduces labor requirement by up to 50%, addressing shortage crisis.' },
-              { icon: '🔧', title: 'Easy to Operate', desc: 'Simple Android app control suitable for farmers with basic technical knowledge.' },
-              { icon: '🌍', title: 'Sustainable', desc: 'Eco-friendly solution promoting sustainable farming practices for future generations.' },
-            ].map((advantage, idx) => (
+              { icon: '🌱', title: t('featuresPage.renewableEnergy'), desc: t('featuresPage.renewableDesc') },
+              { icon: '💰', title: t('featuresPage.costEffective'), desc: t('featuresPage.costEffDesc') },
+              { icon: '⏱️', title: t('featuresPage.timeEfficient'), desc: t('featuresPage.timeDesc') },
+              { icon: '💧', title: t('featuresPage.waterConservation'), desc: t('featuresPage.waterConsDesc') },
+              { icon: '🎯', title: t('featuresPage.precisionFarming'), desc: t('featuresPage.precisionDesc') },
+              { icon: '👥', title: t('featuresPage.laborReduction'), desc: t('featuresPage.laborRedDesc') },
+              { icon: '🔧', title: t('featuresPage.easyOperate'), desc: t('featuresPage.easyDesc') },
+              { icon: '🌍', title: t('featuresPage.sustainablePractice'), desc: t('featuresPage.sustainDesc') },
+            ].map((advantage) => (
               <div
                 key={advantage.title}
                 className="group glass-panel p-8 md:p-10 space-y-4 hover:scale-105 hover:-translate-y-2 transition-all duration-500"
@@ -330,26 +301,26 @@ export default function FeaturesPage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
-              Real-World Applications
+              {t('featuresPage.applications')}
             </h2>
             <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
-              AGRISOLARBOT is designed for diverse agricultural use cases
+              {t('featuresPage.appsDesc')}
             </p>
           </div>
 
           {/* Applications Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
-              { icon: '🌾', title: 'Seed Sowing', desc: 'Uniform seed placement for optimal germination and yield density.' },
-              { icon: '🚜', title: 'Soil Ploughing', desc: 'Deep soil preparation using precision cultivator tools.' },
-              { icon: '🌿', title: 'Weeding', desc: 'Targeted weed removal using rotating blades between crop rows.' },
-              { icon: '💦', title: 'Smart Farming', desc: 'Precision irrigation with sensor-triggered water delivery.' },
-              { icon: '🏡', title: 'Precision Agriculture', desc: 'Data-driven farming decisions using IoT sensor insights.' },
-              { icon: '🌱', title: 'Sustainable Practices', desc: 'Eco-friendly farming promoting long-term soil health.' },
-              { icon: '🏫', title: 'Educational Projects', desc: 'Learning platform for agricultural engineering students.' },
-              { icon: '🤝', title: 'Startup Initiatives', desc: 'Proof-of-concept for agri-tech entrepreneurs.' },
-              { icon: '🔬', title: 'Research Applications', desc: 'Testing ground for new agricultural technologies.' },
-            ].map((app, idx) => (
+              { icon: '🌾', title: t('featuresPage.seedSowing'), desc: t('featuresPage.seedSowDesc') },
+              { icon: '🚜', title: t('featuresPage.soilPloughing'), desc: t('featuresPage.soilDesc') },
+              { icon: '🌿', title: t('featuresPage.weedingApp'), desc: t('featuresPage.weedAppDesc') },
+              { icon: '💦', title: t('featuresPage.smartFarming'), desc: t('featuresPage.smartDesc') },
+              { icon: '🏡', title: t('featuresPage.precisionAgri'), desc: t('featuresPage.precisionAgriDesc') },
+              { icon: '🌱', title: t('featuresPage.sustainablePractices'), desc: t('featuresPage.sustainPracticeDesc') },
+              { icon: '🏫', title: t('featuresPage.educational'), desc: t('featuresPage.educationalDesc') },
+              { icon: '🤝', title: t('featuresPage.startup'), desc: t('featuresPage.startupDesc') },
+              { icon: '🔬', title: t('featuresPage.researchApp'), desc: t('featuresPage.researchDesc') },
+            ].map((app) => (
               <div
                 key={app.title}
                 className="glass-panel p-8 md:p-10 space-y-4 hover:scale-105 hover:shadow-lg transition-all duration-500"
@@ -370,10 +341,10 @@ export default function FeaturesPage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dark mb-4">
-              Considerations & Future Scope
+              {t('featuresPage.considerations')}
             </h2>
             <p className="text-light text-base md:text-lg max-w-2xl mx-auto">
-              Understanding current limitations and exciting future enhancements
+              {t('featuresPage.considerationsDesc')}
             </p>
           </div>
 
@@ -382,7 +353,7 @@ export default function FeaturesPage() {
             {/* Current Limitations */}
             <div className="space-y-6">
               <h3 className="text-2xl font-display font-bold text-dark flex items-center gap-3">
-                <span>⚠️</span> Current Limitations
+                {t('featuresPage.currentLimitations')}
               </h3>
               <ul className="space-y-4">
                 {[
@@ -404,7 +375,7 @@ export default function FeaturesPage() {
             {/* Future Enhancements */}
             <div className="space-y-6">
               <h3 className="text-2xl font-display font-bold text-dark flex items-center gap-3">
-                <span>🔮</span> Future Scope
+                {t('featuresPage.futureScope')}
               </h3>
               <ul className="space-y-4">
                 {[
@@ -440,23 +411,23 @@ export default function FeaturesPage() {
         >
           <div className="glass-panel-deep text-center space-y-6 p-10 md:p-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-dark">
-              Ready to Transform Your Farm?
+              {t('featuresPage.readyToTransform')}
             </h2>
             <p className="text-light text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-              Experience the future of agriculture with AGRISOLARBOT. Automate your farming operations sustainably and efficiently.
+              {t('featuresPage.transformDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-accent text-white font-display font-bold text-base shadow-[0_8px_24px_-6px_rgba(47,107,60,0.35)] hover:shadow-[0_12px_32px_-8px_rgba(47,107,60,0.45)] hover:-translate-y-1 transition-all duration-300"
               >
-                Pre-Order Now
+                {t('common.preOrder')}
               </Link>
               <Link
                 href="/technology"
                 className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/40 backdrop-blur-md border border-primary/30 text-primary font-display font-bold text-base hover:bg-white/60 hover:border-primary/50 transition-all duration-300"
               >
-                Learn Technology
+                {t('featuresPage.learnTech')}
               </Link>
             </div>
           </div>

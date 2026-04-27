@@ -1,42 +1,13 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useTranslations } from '@/i18n/useTranslations';
 
 const VERIFY_URL =
   'https://udyamregistration.gov.in/verifyudyambarcode.aspx?verifyudrn=f5EtyyStJpb+xCX7PdUikJrzXgGgkLVDSqW0JHHtEhI=';
 
-const msmeDetails = [
-  { label: 'Registration Number', value: 'UDYAM-TN-03-0253916', highlight: true },
-  { label: 'Enterprise Type', value: 'Micro Enterprise' },
-  { label: 'Major Activity', value: 'Manufacturing' },
-  { label: 'Enterprise Name', value: 'GREENSPROUT' },
-  { label: 'Date of Registration', value: '24/02/2025' },
-  { label: 'District', value: 'Coimbatore, Tamil Nadu' },
-  { label: 'Host Institution', value: 'PPG Institute of Technology' },
-];
-
-const tnediiDetails = [
-  { label: 'Program', value: 'Innovation Voucher Program (IVP)' },
-  { label: 'Reference Number', value: 'Roc. No. II-01/44/2022/EDII' },
-  { label: 'Total Grant Sanctioned', value: '₹1,92,000', highlight: true },
-  { label: '1st Installment (50%)', value: '₹76,800' },
-  { label: '2nd Installment (40%)', value: '₹61,440' },
-  { label: '3rd Installment (10%)', value: '₹15,360' },
-  { label: 'Company Contribution', value: '₹38,400' },
-  { label: 'Knowledge Partner', value: 'Nehru Group of Institution TBI' },
-  { label: 'Project Duration', value: '08 Months' },
-  { label: 'Approval Date', value: '06.05.2025' },
-];
-
-const trustBadges = [
-  { icon: '🇮🇳', title: 'Govt. of India', sub: 'Ministry of MSME' },
-  { icon: '🏛️', title: 'TN-EDII', sub: 'Innovation Voucher Program' },
-  { icon: '🤝', title: 'NGI TBI', sub: 'Knowledge Partner' },
-  { icon: '📜', title: 'UDYAM Certified', sub: 'UDYAM-TN-03-0253916' },
-];
-
 /* ── Animated Badge Component ─────── */
-function AnimatedBadge({ index, badge }: { index: number; badge: (typeof trustBadges)[0] }) {
+function AnimatedBadge({ index, badge }: { index: number; badge: { icon: string; title: string; sub: string } }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -85,7 +56,7 @@ function AnimatedBadge({ index, badge }: { index: number; badge: (typeof trustBa
 }
 
 /* ── Detail Card Component ─────── */
-function DetailCard({ item, index }: { item: (typeof msmeDetails)[0]; index: number }) {
+function DetailCard({ item, index }: { item: { label: string; value: string; highlight?: boolean }; index: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -137,6 +108,38 @@ function DetailCard({ item, index }: { item: (typeof msmeDetails)[0]; index: num
 }
 
 export default function GovernmentProofPage() {
+  const t = useTranslations();
+
+  const trustBadges = [
+    { icon: '🇮🇳', title: t('govtProof.govtOfIndia'), sub: t('organizations.governmentSub') },
+    { icon: '🏛️', title: 'TN-EDII', sub: t('govtProof.ivp') },
+    { icon: '🤝', title: 'NGI TBI', sub: t('govtProof.knowledgePartner') },
+    { icon: '📜', title: 'UDYAM', sub: 'UDYAM-TN-03-0253916' },
+  ];
+
+  const msmeDetails = [
+    { label: t('govtProof.regNo'), value: 'UDYAM-TN-03-0253916', highlight: true },
+    { label: t('govtProof.enterpriseType'), value: t('govtProof.microEnterprise') },
+    { label: t('govtProof.majorActivity'), value: t('govtProof.manufacturing') },
+    { label: t('govtProof.enterpriseName'), value: 'GREENSPROUT' },
+    { label: t('govtProof.dateOfReg'), value: '24/02/2025' },
+    { label: t('govtProof.district'), value: 'Coimbatore, Tamil Nadu' },
+    { label: t('govtProof.hostInstitution'), value: 'PPG Institute of Technology' },
+  ];
+
+  const tnediiDetails = [
+    { label: t('govtProof.program'), value: t('govtProof.ivp') },
+    { label: t('govtProof.refNo'), value: 'Roc. No. II-01/44/2022/EDII' },
+    { label: t('govtProof.totalGrant'), value: '₹1,92,000', highlight: true },
+    { label: t('govtProof.firstInstallment'), value: '₹76,800' },
+    { label: t('govtProof.secondInstallment'), value: '₹61,440' },
+    { label: t('govtProof.thirdInstallment'), value: '₹15,360' },
+    { label: t('govtProof.companyContribution'), value: '₹38,400' },
+    { label: t('govtProof.knowledgePartner'), value: 'Nehru Group of Institution TBI' },
+    { label: t('govtProof.projectDuration'), value: '08 Months' },
+    { label: t('govtProof.approvalDate'), value: '06.05.2025' },
+  ];
+
   return (
     <main className="min-h-screen">
       {/* ══════════════════════════════════════════════════════════════ */}
@@ -156,17 +159,17 @@ export default function GovernmentProofPage() {
           {/* Subtitle badge */}
           <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-accent/30 text-sm font-semibold text-primary hover:border-accent/60 hover:bg-white/70 transition-all duration-300">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Government Recognition
+            {t('govtProof.badge')}
           </div>
 
           {/* Main heading */}
           <h1 className="text-5xl md:text-7xl font-display font-extrabold mb-6 leading-tight bg-gradient-to-r from-[#2F6B3C] via-[#6FAF5E] to-[#2F6B3C] bg-clip-text text-transparent">
-            Verified. Funded. Ready.
+            {t('govtProof.heading')}
           </h1>
 
           {/* Subtitle text */}
           <p className="text-lg md:text-xl text-light max-w-2xl mx-auto leading-relaxed mb-8">
-            GREENSPROUT is officially recognized by the Government of India as an MSME and funded by Tamil Nadu Innovation Institute. We're backed by trust, validated by institutions.
+            {t('govtProof.desc')}
           </p>
 
           {/* Animated underline */}
@@ -195,10 +198,10 @@ export default function GovernmentProofPage() {
             <div>
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold text-primary">
                 <span className="w-2 h-2 rounded-full bg-primary" />
-                Government of India · Ministry of MSME
+                {t('govtProof.msmeMinistry')}
               </div>
               <h2 className="text-3xl md:text-4xl font-display font-bold text-dark">
-                UDYAM Registration Certificate
+                {t('govtProof.udyamCert')}
               </h2>
             </div>
             <a
@@ -207,7 +210,7 @@ export default function GovernmentProofPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-accent text-white font-display font-bold px-6 py-3.5 rounded-full hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 shadow-sm whitespace-nowrap text-sm"
             >
-              🔗 Verify Certificate
+              {t('govtProof.verifyCert')}
             </a>
           </div>
 
@@ -228,10 +231,10 @@ export default function GovernmentProofPage() {
             <div>
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-blue-100/60 backdrop-blur-sm border border-blue-300/40 text-xs font-bold text-blue-700">
                 <span className="w-2 h-2 rounded-full bg-blue-600" />
-                Tamil Nadu Entrepreneurship Development & Innovation Institute
+                {t('govtProof.tnediiInstitute')}
               </div>
               <h2 className="text-3xl md:text-4xl font-display font-bold text-dark">
-                Innovation Voucher Program
+                {t('govtProof.ivp')}
               </h2>
             </div>
           </div>
@@ -249,32 +252,32 @@ export default function GovernmentProofPage() {
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-lg">
                 💰
               </div>
-              <h3 className="text-xl font-display font-bold text-dark">Funding Disbursement Progress</h3>
+              <h3 className="text-xl font-display font-bold text-dark">{t('govtProof.fundingProgress')}</h3>
             </div>
 
             <div className="space-y-6">
               {[
                 {
-                  label: '1st Installment',
+                  label: t('govtProof.firstInstallment'),
                   amount: '₹76,800 (50%)',
                   pct: 100,
-                  status: '✓ Released',
+                  status: t('govtProof.released'),
                   color: 'from-primary to-accent',
                   statusColor: 'text-green-600',
                 },
                 {
-                  label: '2nd Installment',
+                  label: t('govtProof.secondInstallment'),
                   amount: '₹61,440 (40%)',
                   pct: 0,
-                  status: 'Pending',
+                  status: t('govtProof.pending'),
                   color: 'from-accent/60 to-accent/40',
                   statusColor: 'text-yellow-600',
                 },
                 {
-                  label: '3rd Installment',
+                  label: t('govtProof.thirdInstallment'),
                   amount: '₹15,360 (10%)',
                   pct: 0,
-                  status: 'On Completion',
+                  status: t('govtProof.onCompletion'),
                   color: 'from-gray-300 to-gray-200',
                   statusColor: 'text-gray-600',
                 },
@@ -303,9 +306,9 @@ export default function GovernmentProofPage() {
             {/* Funding Summary */}
             <div className="mt-8 pt-8 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
-                { label: 'Total Grant', value: '₹1,92,000', icon: '💵' },
-                { label: 'Company Contribution', value: '₹38,400', icon: '🤝' },
-                { label: 'Project Duration', value: '08 Months', icon: '⏱️' },
+                { label: t('govtProof.totalGrantLabel'), value: '₹1,92,000', icon: '💵' },
+                { label: t('govtProof.companyContribLabel'), value: '₹38,400', icon: '🤝' },
+                { label: t('govtProof.projectDurationLabel'), value: '08 Months', icon: '⏱️' },
               ].map((item) => (
                 <div key={item.label} className="text-center py-4 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-accent/20">
                   <div className="text-2xl mb-2">{item.icon}</div>
@@ -328,10 +331,10 @@ export default function GovernmentProofPage() {
 
             <div className="relative z-10 max-w-2xl mx-auto text-center">
               <h2 className="text-4xl md:text-5xl font-display font-extrabold mb-6 leading-tight">
-                Government-Backed Innovation
+                {t('govtProof.govtBacked')}
               </h2>
               <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-10">
-                GREENSPROUT has the government validation, institutional support, and financial backing to scale sustainable agriculture across India. We're ready to transform farming.
+                {t('govtProof.govtBackedDesc')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -341,13 +344,13 @@ export default function GovernmentProofPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-display font-bold rounded-full hover:bg-gray-50 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-2xl text-base"
                 >
-                  🔗 Verify on Government Portal
+                  {t('govtProof.verifyPortal')}
                 </a>
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-md border-2 border-white/40 text-white font-display font-bold rounded-full hover:bg-white/30 hover:border-white/60 hover:-translate-y-1 transition-all duration-300 text-base"
                 >
-                  Get In Touch →
+                  {t('govtProof.getInTouch')}
                 </Link>
               </div>
 
@@ -355,15 +358,15 @@ export default function GovernmentProofPage() {
               <div className="mt-12 pt-12 border-t border-white/20 flex flex-wrap justify-center gap-6 text-sm font-semibold text-white/80">
                 <div className="flex items-center gap-2">
                   <span className="text-xl">✓</span>
-                  <span>MSME Registered</span>
+                  <span>{t('govtProof.msmeRegistered')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-xl">✓</span>
-                  <span>Government Funded</span>
+                  <span>{t('govtProof.govtFunded')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-xl">✓</span>
-                  <span>Institution Backed</span>
+                  <span>{t('govtProof.institutionBacked')}</span>
                 </div>
               </div>
             </div>

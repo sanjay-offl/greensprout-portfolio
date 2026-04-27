@@ -2,11 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import FadeIn from '@/components/animations/FadeIn';
-
-interface Feature {
-  icon: string;
-  text: string;
-}
+import { useTranslations } from '@/i18n/useTranslations';
 
 function FeatureCard({ icon, text, index }: { icon: string; text: string; index: number }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -46,46 +42,39 @@ function FeatureCard({ icon, text, index }: { icon: string; text: string; index:
   );
 }
 
-interface BenefitItem {
-  icon: string;
-  title: string;
-  desc: string;
-  color: string;
-  geo: string;
-}
-
-const benefits: BenefitItem[] = [
-  {
-    icon: '🌍',
-    title: 'Environmentally Sustainable',
-    desc: 'Zero emissions, solar-powered operation reduces carbon footprint and fuel dependency across India.',
-    color: '#10B981',
-    geo: 'India-wide impact',
-  },
-  {
-    icon: '💡',
-    title: 'Cost-Effective',
-    desc: 'Operating costs drop 60% compared to traditional diesel machinery. Affordable for small farmers.',
-    color: '#F59E0B',
-    geo: 'Rural communities',
-  },
-  {
-    icon: '⚡',
-    title: 'Highly Efficient',
-    desc: '3× faster task completion with precision IoT monitoring saves water, energy, and resources.',
-    color: '#3B82F6',
-    geo: 'Precision farming',
-  },
-];
-
 export default function SolutionPage() {
   const [scrollY, setScrollY] = useState(0);
+  const t = useTranslations();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const benefits = [
+    {
+      icon: '🌍',
+      title: t('solution.envSustainable'),
+      desc: t('solution.envDesc'),
+      color: '#10B981',
+      geo: t('solution.indiaWide'),
+    },
+    {
+      icon: '💡',
+      title: t('solution.costEffective'),
+      desc: t('solution.costDesc'),
+      color: '#F59E0B',
+      geo: t('solution.rural'),
+    },
+    {
+      icon: '⚡',
+      title: t('solution.highlyEfficient'),
+      desc: t('solution.effDesc'),
+      color: '#3B82F6',
+      geo: t('solution.precision'),
+    },
+  ];
 
   return (
     <>
@@ -127,28 +116,28 @@ export default function SolutionPage() {
               {/* Badge */}
               <FadeIn>
                 <div className="inline-block bg-primary/15 dark:bg-primary/20 text-primary dark:text-accent text-xs font-bold px-4 py-2 rounded-full border border-primary/30 mb-6 sm:mb-8 uppercase tracking-widest">
-                  ✅ Smart Solution
+                  {t('solution.badge')}
                 </div>
               </FadeIn>
 
               {/* Main heading */}
               <FadeIn delay={100}>
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight leading-tight mb-6 bg-gradient-to-r from-[#111827] via-[#2F6B3C] to-[#6FAF5E] dark:from-[#86868B] dark:to-[#6FAF5E] bg-clip-text text-transparent">
-                  AGRISOLARBOT™
+                  {t('solution.heading')}
                 </h1>
               </FadeIn>
 
               {/* Subtitle */}
               <FadeIn delay={200}>
                 <p className="text-lg sm:text-2xl text-primary dark:text-accent font-semibold mb-4">
-                  Complete Autonomous Farming Platform
+                  {t('solution.subtitle')}
                 </p>
               </FadeIn>
 
               {/* Description */}
               <FadeIn delay={300}>
                 <p className="text-base sm:text-lg text-dark/70 dark:text-light/80 max-w-3xl mx-auto leading-relaxed">
-                  AGRISOLARBOT is a solar-powered multipurpose smart farming vehicle that replaces labor-intensive manual operations with intelligent IoT-controlled automation. It seamlessly performs five critical farm operations—ploughing (10-20 cm depth), seed sowing with uniform placement, precision seed drilling (3-6 cm), weed removal, and spraying from a 30-liter tank. Fully autonomous. Battery-backed. App-controlled via Bluetooth.
+                  {t('solution.desc')}
                 </p>
               </FadeIn>
             </div>
@@ -164,21 +153,21 @@ export default function SolutionPage() {
                   {/* Heading */}
                   <div>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dark dark:text-white mb-4 sm:mb-6 leading-tight">
-                      Smart Integration Platform
+                      {t('solution.smartPlatform')}
                     </h2>
                     <p className="text-base sm:text-lg text-dark/70 dark:text-light/75 leading-relaxed">
-                      AGRISOLARBOT integrates mechanical systems, electrical engineering, IoT control, and renewable solar energy into a single unified platform. Designed specifically for small and medium-scale farmers, it overcomes critical challenges: labor shortage (50% reduction from 2-3 workers to 1 operator), high operational costs (60% reduction to ₹50-80/hour vs ₹400-600 traditional), water wastage (40% reduction), and inefficient resource management. Operating at 0.3-0.7 acres/hour with 12V 50W monocrystalline solar panel and 12V lithium-ion battery backup, AGRISOLARBOT enables precision farming with mobile app control via Bluetooth connectivity.
+                      {t('solution.platformDesc')}
                     </p>
                   </div>
 
                   {/* Features List */}
                   <ul className="space-y-3 sm:space-y-4 group" role="list">
                     {[
-                      { icon: '☀️', text: 'Eco-friendly Solar Powered (12V 50W)' },
-                      { icon: '📱', text: 'App & Bluetooth Controlled via Android' },
-                      { icon: '📡', text: 'Real-time IoT Sensor Monitoring' },
-                      { icon: '🤖', text: 'Multi-function Farming Automation' },
-                      { icon: '🔋', text: 'Lead Acid Battery Backup (12V 12Ah)' },
+                      { icon: '☀️', text: t('solution.featureSolar') },
+                      { icon: '📱', text: t('solution.featureBT') },
+                      { icon: '📡', text: t('solution.featureIoT') },
+                      { icon: '🤖', text: t('solution.featureAuto') },
+                      { icon: '🔋', text: t('solution.featureBattery') },
                     ].map(({ icon, text }, idx) => (
                       <FeatureCard key={text} icon={icon} text={text} index={idx} />
                     ))}
@@ -191,7 +180,7 @@ export default function SolutionPage() {
                       className="inline-flex justify-center items-center group bg-gradient-to-r from-primary to-accent text-white font-display font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                       aria-label="Explore all features and specifications"
                     >
-                      <span>Explore All Features</span>
+                      <span>{t('solution.exploreFeatures')}</span>
                       <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </Link>
                     <Link
@@ -199,7 +188,7 @@ export default function SolutionPage() {
                       className="inline-flex justify-center items-center text-primary dark:text-accent font-semibold border-2 border-primary/30 dark:border-accent/30 px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-primary/5 dark:hover:bg-accent/5 hover:border-primary/50 dark:hover:border-accent/50 transition-all duration-300"
                       aria-label="View technology stack and specifications"
                     >
-                      Technology Stack
+                      {t('solution.techStack')}
                     </Link>
                   </div>
                 </div>
@@ -214,10 +203,10 @@ export default function SolutionPage() {
             <FadeIn>
               <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dark dark:text-white mb-4">
-                  Why AGRISOLARBOT?
+                  {t('solution.whySection')}
                 </h2>
                 <p className="text-base sm:text-lg text-dark/70 dark:text-light/75">
-                  Purpose-built for Indian farmers. Designed for sustainability and profitability.
+                  {t('solution.whyDesc')}
                 </p>
               </div>
             </FadeIn>
@@ -266,10 +255,10 @@ export default function SolutionPage() {
             <FadeIn>
               <div className="text-center mb-12 sm:mb-16">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dark dark:text-white mb-4">
-                  Traditional vs. AGRISOLARBOT
+                  {t('solution.comparison')}
                 </h2>
                 <p className="text-base sm:text-lg text-dark/70 dark:text-light/75 max-w-2xl mx-auto">
-                  Comprehensive comparison showing the value proposition
+                  {t('solution.comparisonDesc')}
                 </p>
               </div>
             </FadeIn>
@@ -280,19 +269,19 @@ export default function SolutionPage() {
                 <table className="w-full text-sm sm:text-base">
                   <thead>
                     <tr className="border-b-2 border-primary/20 dark:border-accent/20">
-                      <th className="text-left py-4 px-4 font-display font-bold text-dark dark:text-white">Factor</th>
-                      <th className="text-center py-4 px-4 font-display font-bold text-dark dark:text-white">Traditional</th>
+                      <th className="text-left py-4 px-4 font-display font-bold text-dark dark:text-white">{t('solution.factor')}</th>
+                      <th className="text-center py-4 px-4 font-display font-bold text-dark dark:text-white">{t('solution.traditional')}</th>
                       <th className="text-center py-4 px-4 font-display font-bold text-primary">AGRISOLARBOT</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['Labor Requirement', 'High (2-3 workers)', 'Minimal (1 operator)'],
-                      ['Operating Cost/Hr', '₹400-600', '₹50-80'],
-                      ['Water Waste', '60% waste', '20% waste'],
-                      ['Carbon Emissions', 'High', 'Zero'],
-                      ['IoT Monitoring', 'None', 'Real-time'],
-                      ['Scalability', 'Limited', 'High'],
+                      [t('solution.laborReq'), t('solution.laborHigh'), t('solution.laborMin')],
+                      [t('solution.opCost'), '₹400-600', '₹50-80'],
+                      [t('solution.waterWaste'), '60%', '20%'],
+                      [t('solution.carbonEmissions'), t('solution.high'), t('solution.zero')],
+                      [t('solution.iotMonitoring'), t('solution.none'), t('solution.realtime')],
+                      [t('solution.scalabilityLabel'), t('solution.limited'), t('solution.high')],
                     ].map(([factor, traditional, agrisolar], idx) => (
                       <tr
                         key={factor as string}
@@ -321,11 +310,11 @@ export default function SolutionPage() {
 
                 <div className="relative z-10 space-y-6 text-center">
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black leading-tight">
-                    Ready to Transform Your Farm?
+                    {t('solution.readyCTA')}
                   </h2>
 
                   <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">
-                    Join the agricultural revolution. AGRISOLARBOT is built for Indian farmers, tested for Indian conditions.
+                    {t('solution.readyDesc')}
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -333,13 +322,13 @@ export default function SolutionPage() {
                       href="/contact"
                       className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-white text-primary font-display font-bold hover:scale-105 hover:shadow-lg transition-all duration-300"
                     >
-                      Get in Touch
+                      {t('common.getInTouch')}
                     </Link>
                     <Link
                       href="/demo"
                       className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white text-white font-display font-bold hover:bg-white/10 transition-all duration-300"
                     >
-                      Book a Demo
+                      {t('solution.bookDemo')}
                     </Link>
                   </div>
                 </div>
