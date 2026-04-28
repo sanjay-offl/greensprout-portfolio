@@ -11,7 +11,7 @@ const team = [
 ];
 
 const mentorData = [
-  { name: 'Sakthi Navaneethan B', roleKey: 'academicAdvisor', descKey: 'academicDesc', initials: 'SN', icon: '🎓' },
+  { name: 'Sakthi Navaneethan B', roleKey: 'academicAdvisor', descKey: 'academicDesc', initials: 'SN', icon: '🎓', image: '/images/team/sakthi.jpeg' },
 ];
 
 /* ── Image Loading Skeleton ─────── */
@@ -90,7 +90,13 @@ function MentorCard({ mentor, index, t }: { mentor: (typeof mentorData)[0]; inde
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
         <div className="relative flex items-start gap-5">
           <div className="flex-shrink-0">
-            <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 text-3xl group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-300">{mentor.icon}</div>
+            {mentor.image ? (
+              <div className="w-16 h-16 relative rounded-xl overflow-hidden shadow-sm group-hover:shadow-md transition-shadow">
+                <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              </div>
+            ) : (
+              <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 text-3xl group-hover:from-primary/30 group-hover:to-accent/20 transition-all duration-300">{mentor.icon}</div>
+            )}
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-display font-bold text-dark mb-1 group-hover:text-primary transition-colors duration-300">{mentor.name}</h3>
