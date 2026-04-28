@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from '@/i18n/useTranslations';
 
 const team = [
-  { name: 'Jaya Sounthari A', roleKey: 'ceo', image: '/images/team/jaya.jpeg', fallbackIcon: '👩‍💼' },
-  { name: 'Abarna M', roleKey: 'cto', image: '/images/team/abarna.jpeg', fallbackIcon: '👩‍💻' },
-  { name: 'Anand V', roleKey: 'coo', image: '/images/team/anand.jpeg', fallbackIcon: '👨‍💻' },
-  { name: 'Kavi Nishthini S S', roleKey: 'rd', image: '/images/team/kavi.jpeg', fallbackIcon: '👩‍💼' },
-  { name: 'Sanjay S', roleKey: 'marketing', image: '/images/team/sanjay.jpeg', fallbackIcon: '👨‍🔬' },
+  { name: 'Jaya Sounthari A', roleKey: 'ceo', image: '/images/team/jaya.jpeg', fallbackIcon: '👩‍💼', degreeKey: 'agriEng' },
+  { name: 'Abarna M', roleKey: 'cto', image: '/images/team/abrana.jpeg', fallbackIcon: '👩‍💻', degreeKey: 'agriEng' },
+  { name: 'Anand V', roleKey: 'coo', image: '/images/team/anandh.jpeg', fallbackIcon: '👨‍💻', degreeKey: 'eceEng' },
+  { name: 'Kavi Nishthini S S', roleKey: 'rd', image: '/images/team/kavi.jpeg', fallbackIcon: '👩‍💼', degreeKey: 'agriEng' },
+  { name: 'Sanjay S', roleKey: 'marketing', image: '/images/team/sanjay.jpeg', fallbackIcon: '👨‍🔬', degreeKey: 'cseEng' },
 ];
 
 const mentorData = [
@@ -194,7 +194,7 @@ export default function TeamPage() {
                         <span className="text-2xl flex-shrink-0">{member.fallbackIcon}</span>
                         <div className="flex-1">
                           <p className="font-semibold text-dark">{member.name}</p>
-                          <p className="text-xs text-primary font-medium mt-1">{t('team.agriEng')}</p>
+                          <p className="text-xs text-primary font-medium mt-1">{t(`team.${member.degreeKey}`)}</p>
                         </div>
                       </li>
                     ))}

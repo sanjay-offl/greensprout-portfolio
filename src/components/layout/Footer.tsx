@@ -79,9 +79,18 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-light text-xs">&copy; {year} GreenSprout Pvt. Ltd. All rights reserved. PPG Institute of Technology, Saravanampatti, Coimbatore, Tamil Nadu 641035.</p>
-          <p className="text-light text-xs italic font-medium">{t('footer.slogan')}</p>
+        <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center md:items-end gap-6">
+          <div className="flex flex-col gap-3 text-center md:text-left">
+            <p className="text-light text-xs">&copy; {year} GreenSprout Pvt. Ltd. All rights reserved. PPG Institute of Technology, Saravanampatti, Coimbatore, Tamil Nadu 641035.</p>
+            <div className="text-xs text-light">
+              Website designed by{' '}
+              <span className="font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent relative inline-block group cursor-default">
+                Sanjay S
+                <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
+              </span>
+            </div>
+          </div>
+          <p className="text-light text-xs italic font-medium text-center md:text-right">{t('footer.slogan')}</p>
         </div>
       </div>
     </footer>
